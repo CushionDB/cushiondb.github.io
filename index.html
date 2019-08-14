@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CushionDB</title>
+
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
+    <link rel="stylesheet" href="css/templatemo-style.css">                                   <!-- Templatemo style -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>        
+    <div class="container">
+      <div class="row">
+        <div class="tm-left-right-container">
+          <!-- Left column: logo and menu -->
+          <div class="tm-blue-bg tm-left-column">                        
+            <div class="tm-logo-div text-xs-center">
+              <img src="img/logo-small.png" alt="Logo">
+              <h4>
+                A no-backend database<br />for progressive web apps.
+              </h4>
+            </div>
+            <nav class="tm-main-nav">
+              <ul class="tm-main-nav-ul">
+                <li class="tm-nav-item">
+                  <a href="#introduction" class="tm-nav-item-link">Introduction</a>
+                </li>
+                <li class="tm-nav-item">
+                  <a href="#pwa" class="tm-nav-item-link">Progressive Web Apps</a>
+                </li>
+                <li class="tm-nav-item">
+                  <a href="#offline" class="tm-nav-item-link">Offline First Data Management</a>
+                </li>
+                <li class="tm-nav-item">
+                  <a href="#cushiondb" class="tm-nav-item-link">CushionDB in Detail</a>
+                </li>
+                <li class="tm-nav-item">
+                  <a href="#challenges" class="tm-nav-item-link">Design Decisions and Challenges</a>
+                </li>
+              </ul>
+            </nav>                                         
+          </div> <!-- Left column: logo and menu -->
+
+          <!-- Right column: content -->
+          <div class="tm-right-column">
+            <!-- <figure> -->
+            <!--   <img src="img/neaty-01.jpg" alt="Header image" class="img-fluid"> -->    
+            <!-- </figure> -->
+
+            <div class="tm-content-div">
+              <!-- Welcome section -->
+              <section id="introduction" class="tm-section">
+                <header>
+                  <h2 class="tm-blue-text tm-welcome-title tm-margin-b-45">Introduction</h2>
+                </header>
+                <p> Browsers today offer many tools that web developers can employ in order to make their applications compete with native apps in terms of experience and performance - turning them from web apps, into Progressive Web Apps (PWAs).
+                </p>
+
+                <p>However, these tools are difficult to use, and orchestrating the relationships between them can be tricky and cost many developer hours. This is especially true for offline-first data management - a key piece of any PWA. And so, while these tools are being offered by increasingly more and more browsers and are being utilized by big companies, developers are still hesitant about adopting them for smaller apps.</p>
+
+                <p>CushionDB is an open source, easy-to-use data management framework for building small, offline-first, PWA compliant applications. It simplifies the process of managing and persisting single-user data without writing any server-side database code. It also provides user authentication capabilities that not only remove another thing from the developer’s plate but, as we will later explore, are crucial for efficient client-side data management.</p> 
+
+
+                <p>Finally, CushionDB expands on current offline-first data models by employing different PWA tools that ensure data integrity regardless of network connectivity, and abstracts many of the complexities around utilizing these tools for native-like client side data management.</p>
+                <!-- <figure class="figure"> -->
+                <!--   <img src="img/neaty-02.jpg" class="figure-img img-fluid rounded" alt="..."> -->
+                <!--   <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+                <!-- </figure> -->
+              </section>
+              <section id="pwa" class="tm-section">
+                <header>
+                  <h2 class="tm-blue-text tm-section-title tm-margin-b-45">Progressive Web Apps</h2>
+                </header>
+                <P>Starting with the IPhone in 2007, smartphones have been increasingly replacing computers as the prominent device with which consumers interact with the web. Following the move towards responsive, mobile-friendly web apps, developers started leaning towards native applications, which could provide a better user experience on mobile devices.</P> 
+
+                <p>Progressive Web Applications are the web’s response to this trend.</p>
+                <h3>What are PWAs?</h3>
+                <p>At their core PWAs are an attempt to provide the same, or better, user experience as native apps on the web by enabling apps to:</p>
+
+                <ul>
+                  <li>Feel like a real piece of software - not a website wrapped by a browser</li>
+                  <li>Be navigable via an icon on the user’s home screen</li>
+                  <li>Send push notifications when the app is not open</li>
+                  <li>Perform background activities when the app is closed - like syncing data with a server.</li>
+                  <li>Offer some functionality even when the user is offline, or on an unreliable network.</li>
+                </ul>
+
+
+                <p>The last point is perhaps native’s biggest user experience win. While some native apps do rely on network connectivity as much as some web apps, only the latter do not render at all without network, showing the user a browser’s default ‘no internet connection’ page. A native app will still open and be able to communicate to the user what they can and can’t do without connectivity. Web apps simply cannot.</p>
+                <h4>Offline-First</h4>
+                <p>Of course the above advantage of native apps would not be all that valuable if everyone had a great connection all of the time. And while we sometimes like to imagine that that’s the case, the statistics give us a different picture. There are plenty of people who live in areas where coverage is not great, and even more are coming - 1.75 billion new users are expected to join the mobile internet in the coming years, with a large percentage of them in emerging markets[1] where networks are simply not that great. In India for example, a user can find 3G or better connection only 50% of the time[2]. And even in the west, where the network (at least in and around cities) is better, as long as tunnels, subways and trans-oceanic flights exist, you can rest assured that apps will be experienced offline every once in a while on mobile devices.</p>
+
+                <p>Like Mobile First, Offline-First design is a response to the way apps are used in the real world, as opposed to the way we, as developers, would like them to be used. It’s a philosophy that  says that being offline or having bad network while trying to browse the web should not be considered an error, but a legitimate state that we have to be able to respond to in some way or another.</p>
+                Why PWA?
+                <p>As mentioned, native apps do give you that offline-first functionality and provide it quite well. Why, in that case, would you prefer designing an offline-first app for the web? There is of course a lot of ideology and arguments that lean towards the philosophical - we won’t pretend to have any sort of authority to voice an opinion on those. We will, however, point out some practical advantages for certain areas of development.</p>
+                Rapid Deployment
+                <p>Take for example an app for a non-profit organization with teams that work in remote locations (disaster relief for example) and requires full fledged offline capabilities and native-like features. An app like that would likely require adapting and changing the app according to the needs of the specific mission. Being able to develop apps with offline capabilities on the fly rather than upload new version to the app store and wait for approval could be a great advantage in this case.</p>
+                Less to Learn and Develop
+                <p>PWAs can allow web developers to develop full fledged apps with the tools they are already familiar with (like HTML, CSS and JS), rather than learn platform specific / cross platform libraries. It could also mean the difference between developing a new native app to supply a specific feature, vs adding some native capabilities to an existing web app. And of course, developing an app for one platform takes less time, and is easier to maintain.</p>
+                The PWA Toolkit
+                <p>PWAs can offer these native-like capabilities thanks to tools offered by web browsers. No download or installation is necessary. But it is important to keep in mind that browser support for these tools vary between browsers, with some tools offered by most browsers, and others by only one or two.</p>
+
+                <p>Here is a brief overview of the tools in the so-called PWA toolkit:</p>
+                Web App Manifest
+                <p>A declarative document which browsers can use to determine how to display the browser around the site (color theme, orientation, etc), the app’s icon URL for a home-screen shortcut, and many other properties.</p>
+                Push Notifications
+                <p>A combination of two tools - the Push API, and the Notifications API.</p> 
+
+                <p>The Push API is capable for pushing messages from the server to the service worker on the client (more on service workers later), and the Notifications API interacts with the user’s OS, pushing the notification to the OS’ UI.</p>
+                Cache API
+                <p>Replaces the traditional browser cache that could only be guided by HTTP headers. It is an API that allows the developer to open caches, store, retrieve, update or delete any asset in those caches without cache invalidation tricks and reliance on browsers complying.</p> 
+
+                <p>The Cache API allows for both traditional resource caching and, with the assistance of service-workers, can be used to display cached assets when the network is down.</p>
+                IndexedDB
+                <p>The most comprehensive data-storage solution on the browser - A JavaScript noSQL document database that can store all JS data types as keys and values. The storage size varies by browser but is usually no less than 50mb, making it a large storage solutions available to web apps without requiring installation.</p> 
+                Service Worker
+                <p>The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.</p>
+
+                <p>For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.</p>
+                A Note on Resource Management and Security
+                <p>To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:</p>
+                <p>`install` - occurs when the SW is first installed on the browser</p>
+                <p>`fetch` - occurs when the browser makes an HTTP request to the server</p>
+                <p>`sync` - occurs when the browser detects a connection after being offline</p>
+
+                <p>To make sure service workers cannot alter things other the the website with which they came, the scope of what a service worker can do is limited to where it lives in the code - A service worker cannot access any files sitting above it in the folder structure. Moreover, when a service worker is activated while an app is closed a browser will either notify the user (Chrome), or limit the number of times it is allowed to be triggered (Mozilla).</p>
+                Toolkit Modularity
+                <p>While referred to as a kit, these tools were developed at different points in time for different purposes, and can of course be utilized separately from one another. We can examine how different types of apps can utilize these tools in different ways: Media-heavy apps like the Washington Post and NYT are already making good use of the cacheAPI to allow users to engage with their apps while offline; the TwitterLite PWA makes use of IndexedDB to achieve a blazing fast load time and some offline/bad network functionality; the Pinterest PWA utilizes most of these and also push notification for re-engaging of users; UberLite and other PWAs that cannot be made to be very useful offline regardless of platform have put the web app manifest to use to get a native look and feel.</p>
+
+              </section>  
+              <section id="offline" class="tm-section">
+                <header>
+                  <h2 class="tm-blue-text tm-section-title tm-margin-b-45">Offline First Data Management</h2>
+                </header>
+
+
+
+
+
+              </section>  
+              <section id="" class="tm-section">
+                <header>
+                  <h2 class="tm-blue-text tm-section-title tm-margin-b-45"></h2>
+                </header>
+              </section>  
+              <section id="" class="tm-section">
+                <header>
+                  <h2 class="tm-blue-text tm-section-title tm-margin-b-45"></h2>
+                </header>
+              </section>  
+
+              <!-- About section -->
+              <!-- <section id="" class="tm-section"> -->
+              <!--   <div class="row"> -->                                                                
+              <!--     <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 push-lg-4 push-md-5"> -->
+              <!--       <header> -->
+              <!--         <h2 class="tm-blue-text tm-section-title tm-margin-b-45"></h2> -->
+              <!--       </header> -->
+              <!--       <a href="#" class="tm-button tm-button-wide">Read More</a> -->  
+              <!--     </div> -->
+
+              <!--     <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 pull-lg-8 pull-md-7 tm-about-img-container"> -->
+              <!--       <img src="img/neaty-02.jpg" alt="Image" class="img-fluid"> -->    
+              <!--     </div> -->  
+              <!--   </div> -->                            
+              <!-- </section> -->  
+
+              <!-- Gallery One section -->     
+              <!-- <section id="galleryone" class="tm-section"> -->
+              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Gallery One</h2></header> -->
+              <!--   <div class="tm-gallery-container tm-gallery-1"> -->
+              <!--     <div class="tm-img-container tm-img-container-1"> -->
+              <!--       <img src="img/neaty-03.jpg" alt="Image" class="img-fluid tm-img-tn"> -->
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-1"> -->
+              <!--       <a href="img/neaty-04.jpg"><img src="img/neaty-04.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-1"> -->
+              <!--       <a href="img/neaty-05.jpg"><img src="img/neaty-05.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-1"> -->
+              <!--       <a href="img/neaty-06.jpg"><img src="img/neaty-06.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-1"> -->
+              <!--       <a href="img/neaty-07.jpg"><img src="img/neaty-07.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->                                    
+              <!--   </div> -->
+              <!-- </section> -->
+
+              <!-- Second Gallery section -->     
+              <!-- <section id="secondgallery" class="tm-section"> -->
+              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Second Gallery</h2></header> -->
+              <!--   <div class="tm-gallery-container tm-gallery-2"> -->
+              <!--     <div class="tm-img-container tm-img-container-2"> -->
+              <!--       <a href="img/neaty-08.jpg"><img src="img/neaty-08.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-2"> -->
+              <!--       <a href="img/neaty-09.jpg"><img src="img/neaty-09.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-2"> -->
+              <!--       <a href="img/neaty-10.jpg"><img src="img/neaty-10.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->                                    
+              <!--   </div> -->
+              <!-- </section> -->
+
+              <!-- Third Gallery section -->     
+              <!-- <section id="thirdgallery" class="tm-section"> -->
+              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Third Gallery</h2></header> -->
+              <!--   <div class="tm-gallery-container tm-gallery-3"> -->
+              <!--     <div class="tm-img-container tm-img-container-3"> -->
+              <!--       <a href="img/neaty-11.jpg"><img src="img/neaty-11.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-3"> -->
+              <!--       <a href="img/neaty-12.jpg"><img src="img/neaty-12.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-3"> -->
+              <!--       <a href="img/neaty-13.jpg"><img src="img/neaty-13.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
+              <!--     </div> -->
+              <!--     <div class="tm-img-container tm-img-container-3"> -->
+              <!--       <a href="img/neaty-14.jpg"><img src="img/neaty-14.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
+              <!--     </div> -->                                    
+              <!--   </div> -->
+              <!-- </section> -->
+
+              <!-- Contact Us section -->
+              <!-- <section id="contact" class="tm-section"> -->
+              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Contact Us</h2></header> -->
+
+              <!--   <div class="row"> -->
+              <!--     <div class="col-lg-6"> -->
+              <!--       <form action="#contact" method="post" class="contact-form"> -->
+              <!--         <div class="form-group"> -->
+              <!--           <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/> -->
+              <!--         </div> -->
+              <!--         <div class="form-group"> -->
+              <!--           <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/> -->
+              <!--         </div> -->
+              <!--         <div class="form-group"> -->
+              <!--           <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea> -->
+              <!--         </div> -->                                            
+              <!--         <button type="submit" class="float-right tm-button">Send</button> -->
+              <!--       </form> -->    
+              <!--     </div> -->
+
+              <!--     <div class="col-lg-6 tm-contact-right"> -->
+              <!--       <p> -->
+              <!--       Nullam vivera fermentum purus id blandit. Phasellus lacus mi, porta vel sodales nec, faucibus non eros. Nulla at quam vel risus laoreet tincidunt in in sem. -->    
+              <!--       </p> -->
+              <!--       <address> -->
+              <!--         11/22 Etiam mauris erat,<br> -->
+              <!--         Vestibulum eu augue nec, 10220<br> -->
+              <!--         Nam consequat -->
+              <!--       </address> -->
+              <!--     </div> -->
+              <!--   </div> -->
+
+              <!-- </section> -->
+              <footer>
+              </footer>
+            </div>  
+
+          </div> <!-- Right column: content -->
+        </div>
+      </div> <!-- row -->
+    </div> <!-- container -->
+
+    <!-- load JS files -->
+    <script src="js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
+    <script src="js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
+    <script>     
+
+      $(document).ready(function(){
+        // Single page nav
+        $('.tm-main-nav').singlePageNav({
+          'currentClass' : "active",
+          offset : 20
+        });
+        <!-- $('.tm-current-year').text(new Date().getFullYear()); -->                
+      });
+    </script>             
+  </body>
+</html>
