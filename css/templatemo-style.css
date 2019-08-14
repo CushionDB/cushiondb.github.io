@@ -6,7 +6,7 @@ http://www.templatemo.com/tm-501-neaty
 
 */
 body {
-	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-family: 'Work Sans Ligth', Helvetica, Arial, sans-serif;
 	font-size: 20px;
 	font-weight: 300;
 	overflow-x: hidden;
@@ -27,8 +27,10 @@ a:focus {
 	color: #9ddcd7;
 }
 
-.tm-blue-text {	color: #006599; }
-.tm-blue-bg a {color: #9ddcd7;}
+/* .tm-blue-text {	color: #006599; } */
+.tm-blue-text {	color: #5cc4bd ; }
+/* .tm-blue-bg a {color: #9ddcd7;} */
+.tm-blue-bg a {color: #5cc4bd;}
 
 .tm-site-name {
 	font-size: 4rem;
@@ -78,7 +80,8 @@ p { line-height: 2; }
 .tm-nav-item:active a,
 .tm-nav-item:focus a,
 .tm-nav-item-link.active {
-	color: #f4ef5e;
+	/* color: #f4ef5e; */
+	color: #387571;
 }
 
 .tm-about-img-container { margin-top: 50px; }
@@ -263,11 +266,11 @@ textarea:-ms-input-placeholder {
 
 @media (max-height: 860px) {
 	.tm-logo-div {
-	    padding-top: 100px;
-	    padding-bottom: 100px;
+	    padding-top: 50px;
+	    padding-bottom: 50px;
 	}
 
-	.tm-nav-item { font-size: 1.4rem; }
+	.tm-nav-item { font-size: 1.2rem; }
 
 	.tm-site-name {
 		font-size: 2.4rem;
@@ -277,9 +280,34 @@ textarea:-ms-input-placeholder {
 
 @media (min-height: 859px) {
 	.tm-logo-div {
-	    padding-top: 100px;
-	    padding-bottom: 100px;
+	    padding-top: 50px;
+	    padding-bottom: 50px;
 	}
 
-	.tm-nav-item {font-size: 1.5rem;}
+	.tm-nav-item {font-size: 1.2rem;}
+}
+
+
+/* custom styles */
+
+h1, h2, h3, h4, h5 {
+  font-family: "Brevia" , sans-serif;
+  font-weight: normal;
+}
+h4 {
+  color:#444343 ;
+}
+h1, h4, h5 {
+  font-weight: bold;
+}
+h5  {
+  color: #444343;
+}
+
+.tm-content-div li {
+  margin: 1em 0 1em 0;
+}
+
+.tm-main-nav  li {
+  padding: 5px 0 5px 0;
 }
