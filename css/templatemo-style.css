@@ -1,10 +1,3 @@
-/*
-
-Neaty HTML Template
-
-http://www.templatemo.com/tm-501-neaty
-
-*/
 body {
 	font-family: 'Work Sans Ligth', Helvetica, Arial, sans-serif;
 	font-size: 20px;
@@ -29,8 +22,12 @@ a:focus {
 
 /* .tm-blue-text {	color: #006599; } */
 .tm-green-text {	color: #5cc4bd ; }
+.tm-black-text { color: #4a4a4a; }
+
 /* .tm-blue-bg a {color: #9ddcd7;} */
-.tm-blue-bg a {color: #5cc4bd;}
+.tm-blue-bg a {
+  opacity: 0.5;
+color:#242424 ;}
 
 .tm-site-name {
 	font-size: 4rem;
@@ -53,7 +50,7 @@ a:focus {
 .tm-welcome-title {	font-size: 2.4rem; }
 .tm-section-title {	font-size: 2.2rem; }
 .tm-content-div { padding: 40px; }
-.tm-margin-b-45 { margin-bottom: 45px; }
+.tm-margin-b-45 { margin-bottom: 25px; }
 .tm-margin-b-30 { margin-bottom: 30px; }
 p { line-height: 2; }
 
@@ -81,7 +78,7 @@ p { line-height: 2; }
 .tm-nav-item:focus a,
 .tm-nav-item-link.active {
 	/* color: #f4ef5e; */
-	color: #387571;
+	color:#5CC4BD ;
 }
 
 .tm-about-img-container { margin-top: 50px; }
@@ -104,6 +101,8 @@ p { line-height: 2; }
 .tm-img-tn {
 	padding-left: 5px;
 	padding-right: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .tm-img-tn {
@@ -291,18 +290,19 @@ textarea:-ms-input-placeholder {
 /* custom styles */
 
 h1, h2, h3, h4, h5 {
+  /* color: #4a4a4a; */
   font-family: "Brevia" , sans-serif;
   font-weight: normal;
 }
-h4 {
-  color:#444343 ;
-}
-h1, h4, h5 {
+/* h4 { */
+/*   color:#444343 ; */
+/* } */
+h1, h5, h6  {
   font-weight: bold;
 }
-h5  {
-  color: #444343;
-}
+/* h5  { */
+/*   color: #444343; */
+/* } */
 
 .tm-content-div li {
   margin: 1em 0 1em 0;
@@ -312,6 +312,8 @@ h5  {
   padding: 5px 0 5px 0;
 }
 
-.tm-left-column h4 {
-  color: #5cc4bd;
+.tm-left-column h5 {
+  /* color: #5cc4bd; */
+  opacity: 0.6;
+  color:#242424 ;
 }

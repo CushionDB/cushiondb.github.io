@@ -27,9 +27,9 @@
           <div class="tm-blue-bg tm-left-column">                        
             <div class="tm-logo-div text-xs-center">
               <img src="img/logo-small.png" alt="Logo">
-              <h4>
-                A no-backend database<br />for progressive web apps.
-              </h4>
+              <h5>
+                Database for progressive<br/> web apps.
+              </h5>
             </div>
             <nav class="tm-main-nav">
               <ul class="tm-main-nav-ul">
@@ -46,7 +46,7 @@
                   <a href="#offline" class="tm-nav-item-link">Offline First Data Management</a>
                 </li>
                 <li class="tm-nav-item">
-                  <a href="#solutions" class="tm-nav-item-link">Solutions</a>
+                  <a href="#framework" class="tm-nav-item-link">Need For a Framework</a>
                 </li>
                 <li class="tm-nav-item">
                   <a href="#cushiondb" class="tm-nav-item-link">CushionDB Close-Up</a>
@@ -74,7 +74,7 @@
               <!-- Welcome section -->
               <section id="introduction" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-welcome-title tm-margin-b-45">Introduction</h1>
+                  <h1 class="tm-black-text tm-welcome-title tm-margin-b-45">Introduction</h1>
                   <hr />
                 </header>
                 <p> Browsers today offer many tools that web developers can employ in order to make their applications compete with native apps in terms of experience and performance - turning them from web apps, into Progressive Web Apps (PWAs).
@@ -93,7 +93,7 @@
               </section>
               <section id="pwa" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">Progressive Web Apps</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">Progressive Web Apps</h1>
                   <hr />
                 </header>
                 <P>Starting with the IPhone in 2007, smartphones have been increasingly replacing computers as the prominent device with which consumers interact with the web. Following the move towards responsive, mobile-friendly web apps, developers started leaning towards native applications, which could provide a better user experience on mobile devices.</P> 
@@ -125,7 +125,7 @@
               </section>
               <section id="pwat" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">PWA Toolkit</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">PWA Toolkit</h1>
                   <hr />
                 </header>
                 <p>PWAs can offer these native-like capabilities thanks to tools offered by web browsers. No download or installation is necessary. But it is important to keep in mind that browser support for these tools vary between browsers, with some tools offered by most browsers, and others by only one or two.</p>
@@ -146,6 +146,8 @@
                 <h3>Service Worker</h3>
                 <p>The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.</p>
 
+                    <img src="img/service-worker.png" alt="Image" class="img-fluid tm-img-tn">    
+ 
                 <p>For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.</p>
                 <h5>A Note on Resource Management and Security</h5>
                 <p>To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:</p>
@@ -163,7 +165,7 @@
               </section>  
               <section id="offline" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">Offline First Data Management</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">Offline First Data Management</h1>
                   <hr />
                 </header>
                 <p>Following this brief introduction to PWAs, we will put most of them aside for a moment, and examine the most challenging aspect of offline-first apps - offline first data management. Though only a piece of the PWA puzzle, as we will soon see, data management and serving offline users their data is an area ripe for abstractions and improvements.</p>
@@ -181,6 +183,8 @@
                 <h5>Data Structure</h5>
                 <h5>Traditional: Centralized SQL Database on the Server</h5>
                 <p>Traditionally, we might imagine the data structure of our Todos app to look something like this:</p>
+
+                    <img src="img/er-diagram.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>A table with all of the users’ todos and another table with all of the users. User’s todos are queried using the todo’s `user_id` column.</p>
 
                 <p>However, if we want any offline availability we will have to store all of our user’s data on the browser. Seeing as our most comprehensive option is IndexedDB, a document store, we will change our structure to fit this model.</p>
@@ -188,6 +192,8 @@
                 <p>If we assume the app will only be accessed by a single user (akin to smartphone usage), we can reason that all entries in a browser’s database belong to the user who uses the browser. We no longer have to query a centralized database and filter by user id - all of the data on the browser already belongs to that user.</p>
 
                 <p>Our new data structure might resemble something like this:</p>
+
+                    <img src="img/no-sql-data-structure.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.</p>
                 <h5>Replication Strategy</h5>
 
@@ -198,6 +204,8 @@
                 <p>Distributed data in our case then, becomes about making the data available to the user on multiple devices rather than improving performance.</p>
                 <h5>Traditional: Single Leader and Followers</h5>
                 <p>This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.</p>
+
+                    <img src="img/single-leader.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.</p> 
 
                 <p>However, this approach can get messy quickly - for example, if we update the database while offline on two different devices, how will the server know which device was the last legitimate “leader”?</p> 
@@ -209,17 +217,18 @@
                 <p>Multi-leader replication does introduce data-conflicts, but because our app only has a single user our conflicts are kept at a minimum. Versioning the database and arbitrarily determining a winner in the event of a conflict should be quite sufficient for our single user app.</p>
                 <h4>Final Data Structure</h4>
                 <p>Our final data structure will look something like this:</p>
-
+                    <img src="img/final-data-structure.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices. This might look strange at first, but it is a rather common NoSQL data structure that most, if not all, offline first set ups utilize. If we wanted to include group data (for example to share todos between contacts or within a company) we would set up a database-per-role (or per-group), and so on.</p>
                 <h5>Authentication for DB per User architecture</h5>
                 <p>In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, i.e., the users would authenticate with the application layer. In a database per user architecture, each user is the admin of their own database. The users will have to authenticate with their own database in order to make changes and get data from the server.</p>
+                    <img src="img/traditional-authentication.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.</p>
               </section>  
-              <section id="solutions" class="tm-section">
+              <section id="framework" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">Solution - Need For a Framework</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">Need For a Framework</h1>
                   <hr />
                 </header>
                 
@@ -233,11 +242,14 @@
                 [INSERT CODE EXAMPLE]
                 </p>
 
+                    <img src="img/pouch-pro-cons.png" alt="Image" class="img-fluid tm-img-tn">    
+
                 <h3>Hoodie</h3>
                 <p>Hoodie is an open source framework that simplifies the process of developing offline-first apps. Its built on top of PouchDB and CouchDB and is a no-backend framework - which basically means that a front-end developer can use Hoodie to create an offline-first web app without having to write any database, authentication or routing code.</p>
 
                 <p>Syncing with Hoodie is very similar to the Pouch & Couch model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
 
+                    <img src="img/hoodie-pro-cons.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <h3>CushionDB</h3>
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
@@ -248,10 +260,11 @@
 
               <section id="cushiondb" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">CushionDB in Detail</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">CushionDB in Detail</h1>
                   <hr />
                 </header>
                 <h3>Architecture</h3>
+                    <img src="img/cushiondb-arch.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>This is an overview of CushionDB’s architecture. In this section we will dig deeper into this architecture and see how CushionDB is built. But first we would like to examine further what it means for an offline-first framework to be PWA compliant. To do this we will look at hypothetical in-action scenario.</p>
                 <h5>Scenario</h5>
@@ -259,6 +272,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p> 
 
+                    <img src="img/scenario1.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -353,7 +367,7 @@
               </section>  
               <section id="challenges" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">Design Decisions and Challenges</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">Design Decisions and Challenges</h1>
                   <hr />
                 </header>
 
@@ -386,13 +400,13 @@
               </section>  
               <section id="future" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">Future Plans</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">Future Plans</h1>
                   <hr />
                 </header>
               </section>  
               <section id="about" class="tm-section">
                 <header>
-                  <h1 class="tm-green-text tm-section-title tm-margin-b-45">About Us</h1>
+                  <h1 class="tm-black-text tm-section-title tm-margin-b-45">About Us</h1>
                   <hr />
                 </header>
               </section>  
