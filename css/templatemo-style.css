@@ -311,3 +311,7 @@ h5  {
 .tm-main-nav  li {
   padding: 5px 0 5px 0;
 }
+
+.tm-left-column h4 {
+  color: #5cc4bd;
+}
