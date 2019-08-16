@@ -502,28 +502,52 @@
                   <hr />
                 </header>
 
-                <p>In the process of designing and engineering our framework, we considered tradeoffs to maximize ease of use and automation, while minimizing configuration complexities. In this section we will explore some of the more interesting design decisions and challenges we faced  during development.</p>
+                <p>
+                  In the process of designing and engineering our framework, we considered trade-offs to maximize ease of use and automation, while minimizing configuration complexities. In this section we will explore some of the more interesting design decisions and challenges we faced  during development.
+                </p>
+
                 <h3>One User per Device</h3>
-                <p>Being an in-browser database, the interaction with IndexedDB is slightly different from other databases. The main difference is the lack of authentication on the browser. By going to the developer tools anyone can see all of the data that belongs to this origin’s IndexedDB (domain or subdomain). In order to prevent data from being visible while the user is logged out IndexedDB is usually destroyed between sessions. This of course improves security, but adds load time for fetching data from the server, and if something was not replicated to the server before the user logged out it also means data-loss.</p>
+                <p>
+                  Being an in-browser database, the interaction with IndexedDB is slightly different from other databases. The main difference is the lack of authentication on the browser. By going to the developer tools anyone can see all of the data that belongs to this origin’s IndexedDB (domain or sub-domain). In order to prevent data from being visible while the user is logged out IndexedDB is usually destroyed between sessions. This of course improves security, but adds load time for fetching data from the server, and if something was not replicated to the server before the user logged out it also means data-loss.
+                </p>
 
-                <p>Conversely, many native apps that deal with not-so-sensitive data do not require users to log in to view their data. The assumption is that the user has some screen lock on their phone, and that they are well-aware that some things (such as a credit card number) should not be stored in a note-taking app.</p>
+                <p>
+                  Conversely, many native apps that deal with not-so-sensitive data do not require users to log in to view their data. The assumption is that the user has some screen lock on their phone, and that they are well-aware that some things (such as a credit card number) should not be stored in a note-taking app.
+                </p>
 
-                <p>Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.</p>
+                <p>
+                  Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.
+                </p>
 
                 <p>[add screenshot of code]</p>
+
                 <h3>Service Worker Data Flow</h3>
-                <p>Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.</p>
+                <p>
+                  Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.
+                </p>
 
-                <p>How would a service worker responding to an event while the app is closed know who the user is, whether they are signed in, what database should they push changes to, etc?</p>
+                <img src="./img/arc-close-up.png" class="img-fluid tm-img-tn">
 
-                <p>What we ended up doing is creating a meta-database in IndexedDB which stores user information and is deleted when the user is signed out.</p>
+                <p>
+                  How would a service worker responding to an event while the app is closed know who the user is, whether they are signed in, what database should they push changes to, etc?
+                </p>
+
+                <p>
+                  What we ended up doing is creating a meta-database in IndexedDB which stores user information and is deleted when the user is signed out.
+                </p>
 
                 <h3>Service Worker Event Hijacking</h3>
-                <p>As we saw in the Using CushionDB section CushionDB enables developers to add push notifications and other SW events using the CushionWorker API. Although this is a welcome functionality, as you may have noticed, it seems somewhat extraneous to our offline-first data management framework.</p>
+                <p>
+                  As we saw in the Using CushionDB section CushionDB enables developers to add push notifications and other SW events using the CushionWorker API. Although this is a welcome functionality, as you may have noticed, it seems somewhat extraneous to our offline-first data management framework.
+                </p>
 
-                <p>The reasoning behind this API is that every application can only have one service worker, and service workers cannot have multiple events of the same type. By using the service worker for our purposes we disabled the developer from creating their own push notifications, or messaging between the SW and the main thread for example.</p>
+                <p>
+                  The reasoning behind this API is that every application can only have one service worker, and service workers cannot have multiple events of the same type. By using the service worker for our purposes we disabled the developer from creating their own push notifications, or messaging between the SW and the main thread for example.
+                </p>
 
-                <p>Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.</p> 
+                <p>
+                  Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.
+                </p> 
 
                 <img src="img/cushion-worker.png" alt="Cushion Worker" class="img-fluid tm-img-tn">    
 
