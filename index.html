@@ -137,7 +137,7 @@
                 <p>A combination of two tools - the Push API, and the Notifications API.</p> 
 
                 <p>The Push API is capable for pushing messages from the server to the service worker on the client (more on service workers later), and the Notifications API interacts with the user’s OS, pushing the notification to the OS’ UI.</p>
-                    <img src="img/pushAPI.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/pushAPI.png" alt="Image" class="img-fluid tm-img-tn">    
                 <h3>Cache API</h3>
                 <p>Replaces the traditional browser cache that could only be guided by HTTP headers. It is an API that allows the developer to open caches, store, retrieve, update or delete any asset in those caches without cache invalidation tricks and reliance on browsers complying.</p> 
 
@@ -147,8 +147,8 @@
                 <h3>Service Worker</h3>
                 <p>The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.</p>
 
-                    <img src="img/service-worker-detail.png" alt="Image" class="img-fluid tm-img-tn">    
- 
+                <img src="img/service-worker-detail.png" alt="Image" class="img-fluid tm-img-tn">    
+
                 <p>For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.</p>
                 <h5>A Note on Resource Management and Security</h5>
                 <p>To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:</p>
@@ -173,7 +173,7 @@
                 <h3>Where Would Client-Side Data Management be Most Valuable?</h3> 
                 <p>Not all apps benefit from client side data storage equally.</p> 
 
-                    <img src="img/app-comparison.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/app-comparison.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>We would like to focus on the last category of apps - applications that, when employing an offline-first strategy, could really be made to compete with native app’s offline capabilities.</p>
 
@@ -185,7 +185,7 @@
                 <h5>Traditional: Centralized SQL Database on the Server</h5>
                 <p>Traditionally, we might imagine the data structure of our Todos app to look something like this:</p>
 
-                    <img src="img/todos-relational.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/todos-relational.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>A table with all of the users’ todos and another table with all of the users. User’s todos are queried using the todo’s `user_id` column.</p>
 
                 <p>However, if we want any offline availability we will have to store all of our user’s data on the browser. Seeing as our most comprehensive option is IndexedDB, a document store, we will change our structure to fit this model.</p>
@@ -194,7 +194,7 @@
 
                 <p>Our new data structure might resemble something like this:</p>
 
-                    <img src="img/indexeddb.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/indexeddb.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.</p>
                 <h5>Replication Strategy</h5>
 
@@ -206,7 +206,7 @@
                 <h5>Traditional: Single Leader and Followers</h5>
                 <p>This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.</p>
 
-                    <img src="img/leader-follower.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/leader-follower.png" alt="Image" class="img-fluid tm-img-tn">    
                 <p>We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.</p> 
 
                 <p>However, this approach can get messy quickly - for example, if we update the database while offline on two different devices, how will the server know which device was the last legitimate “leader”?</p> 
@@ -218,12 +218,12 @@
                 <p>Multi-leader replication does introduce data-conflicts, but because our app only has a single user our conflicts are kept at a minimum. Versioning the database and arbitrarily determining a winner in the event of a conflict should be quite sufficient for our single user app.</p>
                 <h4>Final Data Structure</h4>
                 <p>Our final data structure will look something like this:</p>
-                    <img src="img/multi-leader.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/multi-leader.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices. This might look strange at first, but it is a rather common NoSQL data structure that most, if not all, offline first set ups utilize. If we wanted to include group data (for example to share todos between contacts or within a company) we would set up a database-per-role (or per-group), and so on.</p>
                 <h5>Authentication for DB per User architecture</h5>
                 <p>In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, i.e., the users would authenticate with the application layer. In a database per user architecture, each user is the admin of their own database. The users will have to authenticate with their own database in order to make changes and get data from the server.</p>
-                    <img src="img/Authentication.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/Authentication.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.</p>
               </section>  
@@ -232,7 +232,7 @@
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">Solutions</h1>
                   <hr />
                 </header>
-                
+
                 <p>Setting up an offline-first web app is not a trivial task. Due to the complexity of syncing databases and managing multiple admins, some tools and frameworks have been developed in order to make the development of such an app easier.</p>
                 <h3>CouchDB & PouchDB</h3>
                 <p>CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a seperate _users database that stores all admins and their salted password-digests.</p>
@@ -242,20 +242,20 @@
                 <p>CouchDB can be used in tandem with PouchDB - an IndexedDB wrapper that acts as a CouchDB node on the client side. It has the same syncing protocol, and makes replicating databases between client and server very easy.</p>
 
 
-                    <img src="img/pouchdb-p-c.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/pouchdb-p-c.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <h3>Hoodie</h3>
                 <p>Hoodie is an open source framework that simplifies the process of developing offline-first apps. Its built on top of PouchDB and CouchDB and is a no-backend framework - which basically means that a front-end developer can use Hoodie to create an offline-first web app without having to write any database, authentication or routing code.</p>
 
                 <p>Syncing with Hoodie is very similar to the Pouch & Couch model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
 
-                    <img src="img/hoodie-p-c.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/hoodie-p-c.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <h3>CushionDB</h3>
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
 
 
-                    <img src="img/CushionProsCons.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/CushionProsCons.png" alt="Image" class="img-fluid tm-img-tn">    
 
               </section>  
 
@@ -265,7 +265,7 @@
                   <hr />
                 </header>
                 <h3>Architecture</h3>
-                    <img src="img/cushion-arch.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/cushion-arch.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>This is an overview of CushionDB’s architecture. In this section we will dig deeper into this architecture and see how CushionDB is built. But first we would like to examine further what it means for an offline-first framework to be PWA compliant. To do this we will look at hypothetical in-action scenario.</p>
                 <h5>Scenario</h5>
@@ -273,7 +273,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p> 
 
-                    <img src="img/todo-mismatch.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/todo-mismatch.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -299,7 +299,7 @@
                 <p>The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.</p>
 
 
-                    <img src="img/notification-api.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/notification-api.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.</p>
                 <h3>Working with CushionDB</h3>
@@ -310,10 +310,10 @@
                   <li>Docker</li>
                 </ul>
                 <h5>Installing cushionClient</h5>
-                <p>The cushionClient is installed using npm:</p>
+                <p>The Cushion Client is installed using npm:</p>
 
 
-                    <img src="img/" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/" alt="Image" class="img-fluid tm-img-tn">    
                 <p>[cushion installation gif]</p>
 
                 _+_+_+_+_+_+_+_+_ UPDATE AFTER WE’RE DONE
@@ -325,7 +325,7 @@
                 <h5>Installing cushionServer</h5>
                 <p>To use cushionServer the developer needs to add their app’s image to the cushionServerDocker file, and run docker-compose up $APP_NAME in production, or development.</p>
 
-                    <img src="img/cushion-backend-start.gif" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/cushion-backend-start.gif" alt="Image" class="img-fluid tm-img-tn">    
 
                 <h5>Configuration</h5>
                 <p>The the cushion docker image searches for the cushionServerConfig file in a cushionServer folder in the project’s root directory, and should be pushed to git. This is where cushionServer finds the VAPID key for the push notification functionality, and other private keys.</p>
@@ -335,7 +335,7 @@
                 <p>The final folder structure after installing should look like this:</p>
                 <p>[folder structure].</p>
                 <h3>Using CushionDB</h3>
-                    <img src="img/cushionAPI.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/cushionAPI.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a <code>`cushiondb` </code>object in their front end code. This object gives the developer access to the <code>`store`</code> and <code>`account`</code> APIs.</p>
 
@@ -361,7 +361,7 @@
 
                 <p>For any other service worker functionality (like fetch events) developers will add their own scripts to the auto-created sw.js file as they would normally.</p>
 
-                    <img src="img/cushion-worker-api.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/cushion-worker-api.png" alt="Image" class="img-fluid tm-img-tn">    
               </section>  
               <section id="challenges" class="tm-section">
                 <header>
@@ -392,7 +392,7 @@
 
                 <p>Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.</p> 
 
-                    <img src="img/cushion-worker.png" alt="Image" class="img-fluid tm-img-tn">    
+                <img src="img/cushion-worker.png" alt="Image" class="img-fluid tm-img-tn">    
 
               </section>  
               <section id="future" class="tm-section">
@@ -402,7 +402,7 @@
                 </header>
                 <p> Some of the things we are planing to add in the future are:
                 <ul>
-                  <li>Integrating CacheAPI in to the framework</li>
+                  <li>Integrating <code>CacheAPI</code> in to the framework</li>
                   <li>Enabling developers to extend functionality through plugins</li>
                   <li>Improve compatibility with other browsers</li>
                   <li>Expand functionality to accommodate shared data centric apps</li>
@@ -415,7 +415,7 @@
                   <hr />
                 </header>
                 <p>
-Our team of three software engineers collaborated remotely across North America to build CushionDB. Feel free to reach out to us if you have any questions about CushionDB or would like to discuss any of the topics mentioned in our case study.
+                Our team of three software engineers collaborated remotely across North America to build CushionDB. Feel free to reach out to us if you have any questions about CushionDB or would like to discuss any of the topics mentioned in our case study.
                 </p>
                 <ul>
                   <li>
@@ -447,7 +447,7 @@ Our team of three software engineers collaborated remotely across North America 
                       https://www.opensignal.com/reports/2016/08/global-state-of-the-mobile-network</a></li>
                   <li>
                     <a href="https://techcrunch.com/2017/08/25/majority-of-u-s-consumers-still-download-zero-apps-per-month-says-comscore/"
->https://techcrunch.com/2017/08/25/majority-of-u-s-consumers-still-download-zero-apps-per-month-says-comscore/</a>
+                       >https://techcrunch.com/2017/08/25/majority-of-u-s-consumers-still-download-zero-apps-per-month-says-comscore/</a>
                   </li>
                 </ul>
                 </p>
