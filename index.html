@@ -405,7 +405,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p>
 
-                <img src="img/todo-mismatch.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
+                <img src="img/no-cell-reception.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -419,6 +419,7 @@
 
                 <h5>Scenario cont…</h5>
                 <p>With his todos synced, Bob gets to work on his laptop. As new tasks come in he adds them to a new list for tomorrow's todos. The next morning, he is on the subway again, without reception, and opening up the app to go over his todos on his phone, he finds that his tomorrow's todo list - the one he made yesterday in the office - is missing.</p>
+                <img src="img/no-cell-2.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
 
                 <p>Because he was offline when he opened up the app, the changes on the server could not be synced to his device.</p>
 
@@ -430,7 +431,7 @@
 
                 <p>The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.</p>
 
-                <img src="img/notification-api.png" alt="Notifications" class="img-fluid tm-img-tn">
+                <img src="img/sync-manager-flow.png" alt="Notifications" class="img-fluid tm-img-tn">
 
                 <p>Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.</p>
 
