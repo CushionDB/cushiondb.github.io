@@ -1,11 +1,3 @@
 
-![CushionDB Header](img/logo-readme.png)
 
-
-## Overview
-## CushionDB Architecture 
-## The Team
-## Prerequisites
-## Installing CushionDB Client
-## Installing CushionDB Server 
-## CushionDB API
+<p align="center"><img src="https://cushiondb.github.io/img/logo-readme.png"></p>
