@@ -424,45 +424,68 @@
 
                 <h5>CushionDB’s Solution</h5>
 
-                <p>CushionDB utilizes push notifications to push changes to the user’s other devices when they are not running the app.</p>
+                <p>
+                  CushionDB utilizes push notifications to push changes to the user’s other devices when they are not running the app.
+                </p>
 
-                <p>Following the user accepting notifications from the app (which is optional), CushionDB adds the user’s device to the user’s database document on the server. When a change is successfully synced to the server, the user’s active device makes a request to the CushionServer, which triggers a ‘push’ event with the service worker on the user’s other registered devices - all devices other than the one that made the request.</p>
+                <p>
+                  Following the user accepting notifications from the app (which is optional), CushionDB adds the user’s device to the user’s database document on the server. When a change is successfully synced to the server, the user’s active device makes a request to the CushionServer, which triggers a ‘push’ event with the service worker on the user’s other registered devices - all devices other than the one that made the request.
+                </p>
 
-                <p>The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.</p>
+                <p>
+                  The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.
+                </p>
 
                 <img src="img/notification-api.png" alt="Notifications" class="img-fluid tm-img-tn">
 
-                <p>Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.</p>
+                <p>
+                  Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.
+                </p>
 
                 <h3>Working with CushionDB</h3>
-                <p>CushionDB is made up of two main components - the backend, which consists of two docker images, and an NPM package on the client.</p>
+                <p>
+                  CushionDB is made up of two main components - the backend, which consists of two docker images, and an NPM package on the client.
+                </p>
 
                 <h5>Installing CushionClient</h5>
-                <p>CushionClient is an npm package. It can either be added to the projects node modules by running <code>npm i cushion-client</code> from within the project's root directory, or <code>cushion-client</code> can simply be added as a dependency inside the project's <code>package.json</code> file.</p>
-                <p>Once CushionClient has been added as a dependency, there are some configurations that need to be setup for CushionClient to properly work with the CushionDB backend. This requires a <code>.couchConfig.json</code> to be placed in the root directory of the project:</p>
+                <p>
+                  CushionClient is an npm package. It can either be added to the projects node modules by running <code>npm i cushion-client</code> from within the project's root directory, or <code>cushion-client</code> can simply be added as a dependency inside the project's <code>package.json</code> file.
+                </p>
+                <p>
+                  Once CushionClient has been added as a dependency, changes can be made to the <code>.couchConfig.json</code> file within <code>node_modules/cushion-client</code>. This is only necessary if the default server configurations have been changed.
+                </p>
 
                 <img src="img/client-config.png" alt="Image" class="img-fluid tm-img-tn">
 
-                <p>The URLs will be used for networking with the two backend containers and the Public VAPID key is needed for PWA Push Notifications to work.</p>
+                <p>
+                  The URLs will be used for networking with the two backend containers and the Public VAPID key is needed for PWA Push Notifications to work.
+                </p>
 
-                <p>Finally, a Service Worker file (<code>sw.js</code>) needs to be added to the project's root directory with the following code:</p>
+                <p>
+                  Finally, a Service Worker file (<code>sw.js</code>) is needed in the project's root directory. This file comes packaged with the <code>cushion-client</code> node module and can be moved to the project's root directory using <code>mv node_modules/cushion-client/sw.js .</code>:
+                </p>
 
                 <img src="img/sw-code.png" alt="Image" class="img-fluid tm-img-tn">
 
                 <p>This is not what a typical Service Worker file would look like. To make sure CushionDB does not hijack these Service Worker events, we wrapped these events in our own CushionWorker API. More on this soon.</p>
 
                 <h5>Installing the CushionDB Backend</h5>
-                <p>To use cushionServer the developer needs to add their app’s image to the cushionServerDocker file, and run docker-compose up $APP_NAME in production, or development.</p>
+                <p>
+                  Since the CushionDB backend requires two separate Docker containers to run, a Docker Compose file is provided to get both of these containers downloaded, built, configured and running. This file lives in CushionDB's CushionDocker repo.
+                </p>
+
+                <p>
+                  The first step to getting the backend ready is to clone this repo. The next step is to run the <code>cushion-backend-init</code> script from within the cloned directory. This script will prompt the developer for information that will be used for various configurations for the two backend containers.
+                </p>
+
+                <img src="img/cushion-backend-init.gif" alt="Cushion Backend Start" class="img-fluid tm-img-tn">
+
+                <p>
+                  Once the configurations are done, the containers can be built and run. Rather than explicitely running the <code>docker-compose up</code> command, the <code>cushion-backend-start</code> script should be run. This script will first verify that configuration files are in place, then run <code>docker-compose up</code>.
+                </p>
 
                 <img src="img/cushion-backend-start.gif" alt="Cushion Backend Start" class="img-fluid tm-img-tn">
 
-                <h5>Configuration</h5>
-                <p>The the cushion docker image searches for the cushionServerConfig file in a cushionServer folder in the project’s root directory, and should be pushed to git. This is where cushionServer finds the VAPID key for the push notification functionality, and other private keys.</p>
-
-                <p>[image of the config file]</p>
-
-                <p>The final folder structure after installing should look like this:</p>
-                <p>[folder structure].</p>
                 <h3>Using CushionDB</h3>
 
                 <img src="img/cushionAPI.png" alt="CushionAPI" class="img-fluid tm-img-tn">
@@ -505,7 +528,8 @@
 
                 <p>Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.</p>
 
-                <p>[add screenshot of code]</p>
+                <img src="img/signout.png" alt="Destroy Local Database Option" class="img-fluid tm-img-tn">
+
                 <h3>Service Worker Data Flow</h3>
                 <p>Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.</p>
 
