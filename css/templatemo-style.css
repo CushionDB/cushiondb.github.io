@@ -1,5 +1,21 @@
+@font-face {
+	font-family: "WorkSansLight";
+	src: url('../fonts/worksans-light/worksans-light-webfont.woff2') format('woff2'),
+			 url('../fonts/worksans-light/worksans-light-webfont.woff') format('woff');
+	font-weight: lighter;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "BreviaBold";
+	src: url('../fonts/brevia-bold/brevia-bold-webfont.woff2') format('woff2'),
+			 url('../fonts/worksans-light/brevia-bold-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
-	font-family: Work Sans Light, Helvetica, Arial, sans-serif;
+	font-family: WorkSansLight, Helvetica, Arial, sans-serif;
 	font-size: 20px;
 	font-weight: 300;
 	overflow-x: hidden;
@@ -23,11 +39,14 @@ a:focus {
 	color: #fff;
 }
 
-/* .tm-blue-text {	color: #006599; } */
+/* .tm-blue-text {	color: #006599; }
+ */
 .tm-green-text {	color: #5cc4bd ; }
 .tm-black-text { color: #4a4a4a; }
+.tm-blue-text { color: #2f4ba0; }
 
-/* .tm-blue-bg a {color: #9ddcd7;} */
+/* .tm-blue-bg a {color: #9ddcd7;}
+ */
 .tm-blue-bg a {
   opacity: 0.6;
 color:#fff ;
@@ -81,7 +100,8 @@ p { line-height: 2; }
 .tm-nav-item:active a,
 .tm-nav-item:focus a,
 .tm-nav-item-link.active {
-	/* color: #f4ef5e; */
+	/* color: #f4ef5e;
+ */
 	color:#5CC4BD ;
 }
 
@@ -296,15 +316,15 @@ textarea:-ms-input-placeholder {
 
 h1, h2, h3, h4, h5 {
   /* color: #4a4a4a; */
-  font-family: "Brevia" , sans-serif;
-  font-weight: normal;
+  font-family: BreviaBold, sans-serif;
 }
+
 /* h4 { */
 /*   color:#444343 ; */
 /* } */
-h1, h5, h6  {
+/*h1, h5, h6  {
   font-weight: bold;
-}
+}*/
 /* h5  { */
 /*   color: #444343; */
 /* } */
