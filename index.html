@@ -10,14 +10,8 @@
     <!-- load stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
     <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
-    <link rel="stylesheet" href="css/templatemo-style.css">                                   <!-- Templatemo style -->
+    <link rel="stylesheet" href="css/templatemo-style.css">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
     <div class="container">
@@ -39,9 +33,6 @@
                 <li class="tm-nav-item">
                   <a href="#pwa" class="tm-nav-item-link">Progressive Web Apps</a>
                 </li>
-                <!-- <li class="tm-nav-item"> -->
-                <!--   <a href="#pwat" class="tm-nav-item-link">PWA Toolkit</a> -->
-                <!-- </li> -->
                 <li class="tm-nav-item">
                   <a href="#offline" class="tm-nav-item-link">Offline First Data Management</a>
                 </li>
@@ -66,10 +57,6 @@
 
           <!-- Right column: content -->
           <div class="tm-right-column">
-            <!-- <figure> -->
-            <!--   <img src="img/neaty-01.jpg" alt="Header image" class="img-fluid"> -->
-            <!-- </figure> -->
-
             <div class="tm-content-div">
               <!-- Welcome section -->
               <section id="introduction" class="tm-section">
@@ -80,23 +67,26 @@
                 <p> Browsers today offer many tools that web developers can employ in order to make their applications compete with native apps in terms of experience and performance - turning them from web apps, into Progressive Web Apps (PWAs).
                 </p>
 
-                <p>However, these tools are difficult to use, and orchestrating the relationships between them can be tricky and cost many developer hours. This is especially true for offline-first data management - a key piece of any PWA. And so, while these tools are being offered by increasingly more and more browsers and are being utilized by big companies, developers are still hesitant about adopting them for smaller apps.</p>
+                <p>However, these tools are difficult to use, and orchestrating the relationships between them can be tricky and cost many developer hours. This is especially true for offline-first data management - a key piece of any PWA. And so, while these tools are being offered by increasingly more and more browsers, and are being utilized by big companies, developers are still hesitant about adopting them for smaller apps.</p>
 
                 <p>CushionDB is an open source, easy-to-use data management framework for building small, offline-first, PWA compliant applications. It simplifies the process of managing and persisting single-user data without writing any server-side database code. It also provides user authentication capabilities that not only remove another thing from the developer’s plate but, as we will later explore, are crucial for efficient client-side data management.</p>
 
 
                 <p>Finally, CushionDB expands on current offline-first data models by employing different PWA tools that ensure data integrity regardless of network connectivity, and abstracts many of the complexities around utilizing these tools for native-like client side data management.</p>
-                <!-- <figure class="figure"> -->
-                <!--   <img src="img/neaty-02.jpg" class="figure-img img-fluid rounded" alt="..."> -->
-                <!--   <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
-                <!-- </figure> -->
               </section>
+
               <section id="pwa" class="tm-section">
+
                 <header>
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">Progressive Web Apps</h1>
                   <hr />
                 </header>
-                <P>Starting with the IPhone in 2007, smartphones have been increasingly replacing computers as the prominent device with which consumers interact with the web. Following the move towards responsive, mobile-friendly web apps, developers started leaning towards native applications, which could provide a better user experience on mobile devices.</P>
+
+                <p>
+                  Starting with the IPhone in 2007, smartphones have been increasingly replacing computers as the prominent device with which consumers interact with the web. Following the move towards responsive, mobile-friendly web apps, developers started leaning towards native applications, which could provide a better user experience on mobile devices.
+                </p>
+
+                <img src="./img/cellphone-usage.jpg" class="img-fluid tm-img-tn" alt="cellphone usage statistics">
 
                 <p>Progressive Web Applications are the web’s response to this trend.</p>
                 <h3>What are PWAs?</h3>
@@ -106,141 +96,283 @@
                   <li>Feel like a real piece of software - not a website wrapped by a browser</li>
                   <li>Be navigable via an icon on the user’s home screen</li>
                   <li>Send push notifications when the app is not open</li>
-                  <li>Perform background activities when the app is closed - like syncing data with a server.</li>
-                  <li>Offer some functionality even when the user is offline, or on an unreliable network.</li>
+                  <li>
+                    Perform background activities when the app is closed - like syncing data with a server.
+                  </li>
+                  <li>
+                    Offer some functionality even when the user is offline, or on an unreliable network.
+                  </li>
                 </ul>
 
+                <p>
+                  The last point is perhaps native’s biggest user experience win. While some native apps do rely on network connectivity as much as some web apps, only the latter do not render at all without network, showing the user a browser’s default <em>‘no internet connection’</em> page. A native app will still open and be able to communicate to the user what they can and can’t do without connectivity, while web apps simply cannot.
+                </p>
 
-                <p>The last point is perhaps native’s biggest user experience win. While some native apps do rely on network connectivity as much as some web apps, only the latter do not render at all without network, showing the user a browser’s default ‘no internet connection’ page. A native app will still open and be able to communicate to the user what they can and can’t do without connectivity. Web apps simply cannot.</p>
                 <h3>Offline-First</h3>
-                <p>Of course the above advantage of native apps would not be all that valuable if everyone had a great connection all of the time. And while we sometimes like to imagine that that’s the case, the statistics give us a different picture. There are plenty of people who live in areas where coverage is not great, and even more are coming - 1.75 billion new users are expected to join the mobile internet in the coming years, with a large percentage of them in emerging markets[1] where networks are simply not that great. In India for example, a user can find 3G or better connection only 50% of the time[2]. And even in the west, where the network (at least in and around cities) is better, as long as tunnels, subways and trans-oceanic flights exist, you can rest assured that apps will be experienced offline every once in a while on mobile devices.</p>
+                <p>
+                  Of course the above advantage of native apps would not be all that valuable if everyone had a great connection all of the time. And while we sometimes like to imagine that that’s the case, the statistics give us a different picture.
+                </p>
 
-                <p>Like Mobile First, Offline-First design is a response to the way apps are used in the real world, as opposed to the way we, as developers, would like them to be used. It’s a philosophy that  says that being offline or having bad network while trying to browse the web should not be considered an error, but a legitimate state that we have to be able to respond to in some way or another.</p>
+                <img src="./img/unable-to-connect.png" class="img-fluid tm-img-tn" alt="cellphone usage statistics" alt="Chrome default no internet page">
+
+                <p>
+                  There are plenty of people who live in areas where coverage is not great, and even more are coming - 1.75 billion new users are expected to join the mobile internet in the coming years, with a large percentage of them in emerging markets[1] where networks are simply not that great. In India for example, a user can find 3G or better connection only 50% of the time[2]. And even in the west, where the network (at least in and around cities) is better, as long as tunnels, subways and trans-oceanic flights exist, you can rest assured that apps will be experienced offline every once in a while on mobile devices.
+                </p>
+
+                <p>
+                  Like Mobile First, Offline-First design is a response to the way apps are used in the real world, as opposed to the way we, as developers, would like them to be used. It’s a philosophy that says that being offline or having bad network while trying to browse the web should not be considered an error, but a legitimate state that we should be able to respond to in some way or another.
+                </p>
+
                 <h3>Why PWA?</h3>
-                <p>As mentioned, native apps do give you that offline-first functionality and provide it quite well. Why, in that case, would you prefer designing an offline-first app for the web? There is of course a lot of ideology and arguments that lean towards the philosophical - we won’t pretend to have any sort of authority to voice an opinion on those. We will, however, point out some practical advantages for certain areas of development.</p>
+                <p>
+                  As noted, native apps do give you that offline-first functionality and provide it quite well. Why, in that case, would you opt to designing an offline-first app for the web? There is of course a lot of ideology that goes into play oftentimes when making these decisions, but this discussion is a philosophical one - we do not claim to have any sort of authority in this regard. But we will point out some practical advantages PWAs have for certain types of development.
+                </p>
+
                 <h5>Rapid Deployment</h5>
-                <p>Take for example an app for a non-profit organization with teams that work in remote locations (disaster relief for example) and requires full fledged offline capabilities and native-like features. An app like that would likely require adapting and changing the app according to the needs of the specific mission. Being able to develop apps with offline capabilities on the fly rather than upload new version to the app store and wait for approval could be a great advantage in this case.</p>
+                <p>
+                  Take for example an app for a non-profit organization with teams that work in remote locations (disaster relief for example) and requires full fledged offline capabilities and native-like features. An app like that would likely require frequent adaptations and changes according to the needs of the specific mission. Being able to develop apps with offline capabilities on the fly rather than upload new version to the app store and wait for approval could be a great advantage in this case.
+                </p>
+
+                <p>
+                  It is also reasonable to not have an app for private use be uploaded onto a public app store.
+                </p>
+
                 <h5>Less to Learn and Develop</h5>
-                <p>PWAs can allow web developers to develop full fledged apps with the tools they are already familiar with (like HTML, CSS and JS), rather than learn platform specific / cross platform libraries. It could also mean the difference between developing a new native app to supply a specific feature, vs adding some native capabilities to an existing web app. And of course, developing an app for one platform takes less time, and is easier to maintain.</p>
+                <p>
+                  PWAs can allow web developers to develop full fledged apps with the tools they are already familiar with (like HTML, CSS and JS), rather than learn platform specific / cross platform libraries. It could also mean the difference between developing a new native app to supply a specific feature, vs adding some native capabilities to an existing web app. And of course, developing an app for one platform takes less time, and is easier to maintain.
+                </p>
+
               </section>
+
               <section id="pwat" class="tm-section">
+
                 <header>
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">PWA Toolkit</h1>
                   <hr />
                 </header>
-                <p>PWAs can offer these native-like capabilities thanks to tools offered by web browsers. No download or installation is necessary. But it is important to keep in mind that browser support for these tools vary between browsers, with some tools offered by most browsers, and others by only one or two.</p>
 
-                <p>Here is a brief overview of the tools in the so-called PWA toolkit:</p>
+                <p>
+                  PWAs can offer these native-like capabilities thanks to tools offered by web browsers. No download or installation is necessary. But it is important to keep in mind that browser support for these tools vary between browsers, with some tools offered by most browsers, and others by only one or two.
+                </p>
+
+                <p>Following is a short examination of the PWA toolkit:</p>
+
                 <h3>Web App Manifest</h3>
-                <p>A declarative document which browsers can use to determine how to display the browser around the site (color theme, orientation, etc), the app’s icon URL for a home-screen shortcut, and many other properties.</p>
+                <p>
+                  A declarative document which browsers can use to determine how to display the browser around the site (color theme, orientation, etc), the app’s icon URL for a home-screen shortcut, and many other properties.
+                </p>
+
                 <h3>Push Notifications</h3>
                 <p>A combination of two tools - the Push API, and the Notifications API.</p>
 
-                <p>The Push API is capable for pushing messages from the server to the service worker on the client (more on service workers later), and the Notifications API interacts with the user’s OS, pushing the notification to the OS’ UI.</p>
+                <p>
+                  The Push API is capable for pushing messages from the server to the service worker on the client (more on service workers later), and the Notifications API interacts with the user’s OS, pushing the notification to the OS’ UI.
+                </p>
                 <img src="img/pushAPI.png" alt="Image" class="img-fluid tm-img-tn">
+
                 <h3>Cache API</h3>
-                <p>Replaces the traditional browser cache that could only be guided by HTTP headers. It is an API that allows the developer to open caches, store, retrieve, update or delete any asset in those caches without cache invalidation tricks and reliance on browsers complying.</p>
+                <p>
+                  Replaces the traditional browser cache that took caching instructions from HTTP headers. It is an API that allows the developer to open caches, store, retrieve, update or delete any asset in those caches without cache invalidation tricks and reliance on browsers complying with the instructions.
+                </p>
 
-                <p>The Cache API allows for both traditional resource caching and, with the assistance of service-workers, can be used to display cached assets when the network is down.</p>
+                <p>
+                  The Cache API allows for both traditional resource caching and, with the assistance of service-workers, can be used to display cached assets when the network is down.
+                </p>
+
                 <h3>IndexedDB</h3>
-                <p>The most comprehensive data-storage solution on the browser - A JavaScript noSQL document database that can store all JS data types as keys and values. The storage size varies by browser but is usually no less than 50mb, making it a large storage solutions available to web apps without requiring installation.</p>
+                <p>
+                  The most comprehensive data-storage solution on the browser - A JavaScript noSQL document database that can store all JS data types as keys and values. The storage size varies by browser but is usually no less than 50mb, making it a large storage solutions available to web apps without requiring installation.
+                </p>
+
                 <h3>Service Worker</h3>
-                <p>The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.</p>
+                <p>
+                  The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.
+                </p>
 
-                <img src="img/service-worker-detail.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/service-worker-detail.png" style="width: 70%"alt="Image" class="img-fluid tm-img-tn">
 
-                <p>For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.</p>
+                <p>
+                  For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.
+                </p>
+
                 <h5>A Note on Resource Management and Security</h5>
-                <p>To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:</p>
+                <p>
+                  To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:
+                </p>
 
                 <ul>
                   <li><code>`install` </code> occurs when the SW is first installed on the browser</li>
                   <li><code>`fetch` </code> occurs when the browser makes an HTTP request to the server</li>
-                  <li><code>`sync` </code> occurs when the browser detects a connection after being offline</li>
+                  <li>
+                    <code>`sync` </code> occurs when the browser detects a connection after being offline
+                  </li>
                 </ul>
 
-                <p>To make sure service workers cannot alter things other the the website with which they came, the scope of what a service worker can do is limited to where it lives in the code - A service worker cannot access any files sitting above it in the folder structure. Moreover, when a service worker is activated while an app is closed a browser will either notify the user (Chrome), or limit the number of times it is allowed to be triggered (Mozilla).</p>
+                <p>
+                  To make sure service workers cannot alter things other the the website with which they came, the scope of what a service worker can do is limited to where it lives in the code - A service worker cannot access any files sitting above it in the folder structure. Moreover, when a service worker is activated while an app is closed a browser will either notify the user (Chrome), or limit the number of times it is allowed to be triggered (Mozilla).
+                </p>
+
                 <h3>Toolkit Modularity</h3>
-                <p>While referred to as a kit, these tools were developed at different points in time for different purposes, and can of course be utilized separately from one another. We can examine how different types of apps can utilize these tools in different ways: Media-heavy apps like the Washington Post and NYT are already making good use of the cacheAPI to allow users to engage with their apps while offline; the TwitterLite PWA makes use of IndexedDB to achieve a blazing fast load time and some offline/bad network functionality; the Pinterest PWA utilizes most of these and also push notification for re-engaging of users; UberLite and other PWAs that cannot be made to be very useful offline regardless of platform have put the web app manifest to use to get a native look and feel.</p>
+                <p>
+                  While referred to as a kit, these tools were developed at different points in time for different purposes, and can of course be utilized separately from one another. We can examine how different types of apps can utilize these tools in different ways:
+                  <ul>
+                    <li>
+                      Media-heavy apps like the Washington Post and NYT are already making good use of the cacheAPI to allow users to engage with their apps while offline.
+                    </li>
+                    <li>
+                      The TwitterLite PWA makes use of IndexedDB and the CacheAPI to store data and pages on the client thus achieving a blazing fast load time, and also some offline/bad network functionality.
+                    </li>
+                    <li>
+                      The Pinterest PWA utilizes most of these and also push notification for re-engaging of users
+                    </li>
+                    <li>
+                      UberLite and other real-time apps that cannot be made to be very useful while offline - regardless of platform, can achieve fast load times using PWA tools, and have put the web app manifest to use to get a native look and feel
+                    </li>
+                  </ul>
+                </p>
 
               </section>
               <section id="offline" class="tm-section">
+
                 <header>
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">Offline First Data Management</h1>
                   <hr />
                 </header>
-                <p>Following this brief introduction to PWAs, we will put most of them aside for a moment, and examine the most challenging aspect of offline-first apps - offline first data management. Though only a piece of the PWA puzzle, as we will soon see, data management and serving offline users their data is an area ripe for abstractions and improvements.</p>
+
+                <p>
+                  Following this brief introduction to PWAs, we will put most of them aside for a moment, and examine the most challenging aspect of offline-first apps - offline first data management. Though only a piece of the PWA puzzle, as we will soon see, data management and serving offline users their data is an area ripe for abstractions and improvements.
+                </p>
+
                 <h3>Where Would Client-Side Data Management be Most Valuable?</h3>
-                <p>Not all apps benefit from client side data storage equally.</p>
+                <p>
+                  Not all apps benefit from client side data storage equally. Following is a chart that examines apps that rely heavily on user-inputted data (as opposed to media-apps and games etc).
+                </p>
 
-                <img src="img/app-comparison.png" alt="Image" class="img-fluid tm-img-tn">
-
-                <p>We would like to focus on the last category of apps - applications that, when employing an offline-first strategy, could really be made to compete with native app’s offline capabilities.</p>
+                <img src="img/app-comparison.png" alt="Application Comparison" class="img-fluid tm-img-tn">
+                <p>
+                  As we can see some client-side storage could make a difference in many types of apps, but we will be focusing on the last category of apps - private note taking, todos or fitness tracking applications and the like. Apps that, when employing an offline-first strategy, could really be made to compete with native app’s offline capabilities.
+                </p>
 
                 <h5>Example app: Private Todos app</h5>
+                <p>
+                  To examine the manual steps needed in order to make an app offline-first we will look at a hypothetical private todos app. In our app the todos are completely private to the user, and todos cannot be shared between users of the app.
+                </p>
 
-                <p>To examine the way an app could be tweaked in order to be made offline-first we will look at a hypothetical private todos app. In our app the todos are completely private to the user, and todos cannot be shared between users of the app.</p>
-                <h3>Offline-First Data Structure Considerations</h3>
-                <h5>Data Structure</h5>
+                <h3>Offline-First Architecture</h3>
+                <h4>Data Structure</h4>
+
                 <h5>Traditional: Centralized SQL Database on the Server</h5>
-                <p>Traditionally, we might imagine the data structure of our Todos app to look something like this:</p>
+                <p>
+                  Traditionally, we might imagine the data structure of our Todos app to look something like this:
+                </p>
 
                 <img src="img/todos-relational.png" alt="Image" class="img-fluid tm-img-tn">
-                <p>A table with all of the users’ todos and another table with all of the users. User’s todos are queried using the todo’s `user_id` column.</p>
 
-                <p>However, if we want any offline availability we will have to store all of our user’s data on the browser. Seeing as our most comprehensive option is IndexedDB, a document store, we will change our structure to fit this model.</p>
+                <p>
+                  A table with all of the users’ todos and another table with all of the users. User’s todos are queried using the todo’s `user_id` column.
+                </p>
+
+                <p>
+                  However, if we want any offline availability we will have to store all of our user’s data on the browser. Seeing as our most comprehensive option is IndexedDB, a document store, we will change our structure to fit this model.
+                </p>
+
                 <h5>Alternative: NoSQL Database on the Browser</h5>
-                <p>If we assume the app will only be accessed by a single user (akin to smartphone usage), we can reason that all entries in a browser’s database belong to the user who uses the browser. We no longer have to query a centralized database and filter by user id - all of the data on the browser already belongs to that user.</p>
+                <p>
+                  If we assume the app will only be accessed by a single user (akin to smartphone usage), we can reason that all entries in a browser’s database belong to the user who uses the browser. We no longer have to query a centralized database and filter by user id - all of the data on the browser already belongs to that user.
+                </p>
 
                 <p>Our new data structure might resemble something like this:</p>
 
-                <img src="img/indexeddb.png" alt="Image" class="img-fluid tm-img-tn">
-                <p>An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.</p>
-                <h5>Replication Strategy</h5>
+                <img src="img/indexeddb.png" alt="IndexedDB" class="img-fluid tm-img-tn">
 
-                <p>Usually when we talk about replication we refer to a means to back up a database or reduce its load. In the offline-first scenario however, distributed data takes on a slightly different meaning.</p>
+                <p>
+                  An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.
+                </p>
 
-                <p>Recall that at this stage we have all of our user’s data in the browser’s database. In our current model if the user switched devices or even browsers (from Chrome to Mozilla for example) the data will not be synced across app instances. If we want to enable the user to use the application on multiple devices then we need to come up with a replication strategy that will keep the user’s devices up to date.</p>
+                <h4>Replication Strategy</h4>
+                <p>
+                  Usually when we talk about replication we refer to a means to back up a database or reduce its load. In the offline-first scenario however, distributed data takes on a slightly different meaning.
+                </p>
 
-                <p>Distributed data in our case then, becomes about making the data available to the user on multiple devices rather than improving performance.</p>
+                <p>
+                  Recall that at this stage we have all of our user’s data in the browser’s database. In our current model if the user switched devices or even browsers (from Chrome to Mozilla for example) - the data will not be synced across app instances. If we want to enable the user to use the application on multiple devices then we need to come up with a replication strategy that will keep the user’s devices up to date.
+                </p>
+
+                <p>
+                  Distributed data in our case then, becomes about making the data available to the user on multiple devices rather than improving performance.
+                </p>
+
                 <h5>Traditional: Single Leader and Followers</h5>
-                <p>This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.</p>
+                <p>
+                  This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.
+                </p>
+                <img src="img/leader-follower.png" alt="Leader Follower" class="img-fluid tm-img-tn">
 
-                <img src="img/leader-follower.png" alt="Image" class="img-fluid tm-img-tn">
-                <p>We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.</p>
+                <p>
+                  We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.
+                </p>
 
-                <p>However, this approach can get messy quickly - for example, if we update the database while offline on two different devices, how will the server know which device was the last legitimate “leader”?</p>
+                <p>
+                  However, this approach can get messy quickly - for example, if we update the database while offline on two different devices, how will the server know which device was the last legitimate “leader”?
+                </p>
+
                 <h5>Alternative: Multi-Leader Replication</h5>
-                <p>Multileader replication is usually useful for data that is replicated across multiple data centers, and would not traditionally come up in our small use case. However, our single-user offline-first scenario maps quite well to a multileader model.</p>
+                <p>
+                  Multileader replication is usually useful for data that is replicated across multiple data centers, and would not traditionally come up in our small use case. However, our single-user offline-first scenario maps quite well to a multileader model.
+                </p>
 
-                <p>We can treat every client side database as a leader, with a server-side leader/coordinator that is responsible for communicating the changes asynchronisly between the devices that cannot communicate directly with each other.</p>
+                <p>
+                  We can treat every client side database as a leader, with a server-side leader/coordinator that is responsible for communicating the changes asynchronously between the devices that cannot communicate directly with each other.
+                </p>
+
                 <h5>A Note on Conflict Resolution in Multi-Leader Replication</h5>
-                <p>Multi-leader replication does introduce data-conflicts, but because our app only has a single user our conflicts are kept at a minimum. Versioning the database and arbitrarily determining a winner in the event of a conflict should be quite sufficient for our single user app.</p>
+                <p>
+                  Multi-leader replication does introduce data-conflicts, but because our app only has a single user our conflicts are kept at a minimum. Versioning the database and arbitrarily determining a winner in the event of a conflict should be quite sufficient for our single user app.
+                </p>
+
                 <h4>Final Data Structure</h4>
                 <p>Our final data structure will look something like this:</p>
-                <img src="img/multi-leader.png" alt="Image" class="img-fluid tm-img-tn">
 
-                <p>We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices. This might look strange at first, but it is a rather common NoSQL data structure that most, if not all, offline first set ups utilize. If we wanted to include group data (for example to share todos between contacts or within a company) we would set up a database-per-role (or per-group), and so on.</p>
-                <h5>Authentication for DB per User architecture</h5>
-                <p>In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, i.e., the users would authenticate with the application layer. In a database per user architecture, each user is the admin of their own database. The users will have to authenticate with their own database in order to make changes and get data from the server.</p>
-                <img src="img/Authentication.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/multi-leader.png" alt="Final data structure" class="img-fluid tm-img-tn">
 
-                <p>Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.</p>
+                <p>
+                  We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices.
+                </p>
+                <p>
+                  This might look strange at first, but it is a rather common NoSQL data structure that most, if not all, offline first set ups utilize. If we wanted to include group data (for example to share todos between contacts or within a company) we would set up a database-per-role (or per-group), and so on.
+                </p>
+
+                <h4>Authentication for DB per User architecture</h4>
+                <p>
+                  In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, i.e. the users would authenticate with the application layer. In a database per user architecture, each user is the admin of their own database. The users will have to authenticate with their own database in order to make changes and get data from the server.
+                </p>
+
+                <img src="img/authentication.png" alt="Image" class="img-fluid tm-img-tn">
+
+                <p>
+                  Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.
+                </p>
+
               </section>
               <section id="solutions" class="tm-section">
+
                 <header>
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">Solutions</h1>
                   <hr />
                 </header>
 
-                <p>Setting up an offline-first web app is not a trivial task. Due to the complexity of syncing databases and managing multiple admins, some tools and frameworks have been developed in order to make the development of such an app easier.</p>
-                <h3>CouchDB & PouchDB</h3>
-                <p>CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a seperate _users database that stores all admins and their salted password-digests.</p>
+                <p>
+                  Setting up an offline-first web app is not a trivial task. Due to the complexity of syncing databases and managing multiple admins, some tools and frameworks have been developed in order to make the development of such an app easier.
+                </p>
 
-                <p> <img src="img/pouchdb.png" alt="Image" class="img-fluid tm-img-tn">    </p>
+                <h3>CouchDB & PouchDB</h3>
+                <p>
+                  CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a separate _users database that stores all admins and their salted password-digests.
+                </p>
+
+                <img src="img/pouchdb.png" alt="pouchDB code" class="img-fluid tm-img-tn">
 
                 <p>CouchDB can be used in tandem with PouchDB - an IndexedDB wrapper that acts as a CouchDB node on the client side. It has the same syncing protocol, and makes replicating databases between client and server very easy.</p>
-
 
                 <img src="img/pouchdb-p-c.png" alt="Image" class="img-fluid tm-img-tn">
 
@@ -249,13 +381,13 @@
 
                 <p>Syncing with Hoodie is very similar to the Pouch & Couch model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
 
-                <img src="img/hoodie-p-c.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/hoodie-p-c.png" alt="Hoodie Pros Cons" class="img-fluid tm-img-tn">
 
                 <h3>CushionDB</h3>
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
 
 
-                <img src="img/CushionProsCons.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/CushionProsCons.png" alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
 
               </section>
 
@@ -265,7 +397,7 @@
                   <hr />
                 </header>
                 <h3>Architecture</h3>
-                <img src="img/cushion-arch.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/cushion-arch.png" alt="CushionDB Architecture" class="img-fluid tm-img-tn">
 
                 <p>This is an overview of CushionDB’s architecture. In this section we will dig deeper into this architecture and see how CushionDB is built. But first we would like to examine further what it means for an offline-first framework to be PWA compliant. To do this we will look at hypothetical in-action scenario.</p>
                 <h5>Scenario</h5>
@@ -273,7 +405,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p>
 
-                <img src="img/todo-mismatch.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/todo-mismatch.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -298,8 +430,7 @@
 
                 <p>The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.</p>
 
-
-                <img src="img/notification-api.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/notification-api.png" alt="Notifications" class="img-fluid tm-img-tn">
 
                 <p>Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.</p>
 
@@ -323,7 +454,7 @@
                 <h5>Installing the CushionDB Backend</h5>
                 <p>To use cushionServer the developer needs to add their app’s image to the cushionServerDocker file, and run docker-compose up $APP_NAME in production, or development.</p>
 
-                <img src="img/cushion-backend-start.gif" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/cushion-backend-start.gif" alt="Cushion Backend Start" class="img-fluid tm-img-tn">
 
                 <h5>Configuration</h5>
                 <p>The the cushion docker image searches for the cushionServerConfig file in a cushionServer folder in the project’s root directory, and should be pushed to git. This is where cushionServer finds the VAPID key for the push notification functionality, and other private keys.</p>
@@ -333,11 +464,10 @@
                 <p>The final folder structure after installing should look like this:</p>
                 <p>[folder structure].</p>
                 <h3>Using CushionDB</h3>
-                <img src="img/cushionAPI.png" alt="Image" class="img-fluid tm-img-tn">
+
+                <img src="img/cushionAPI.png" alt="CushionAPI" class="img-fluid tm-img-tn">
 
                 <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a <code>`cushiondb` </code>object in their front end code. This object gives the developer access to the <code>`store`</code> and <code>`account`</code> APIs.</p>
-
-
 
                 <h5>`cushiondb.store`</h5>
 
@@ -359,7 +489,7 @@
 
                 <p>For any other service worker functionality (like fetch events) developers will add their own scripts to the auto-created sw.js file as they would normally.</p>
 
-                <img src="img/cushion-worker-api.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/cushion-worker-api.png" alt="Cushion Worker API" class="img-fluid tm-img-tn">
               </section>
               <section id="challenges" class="tm-section">
                 <header>
@@ -390,7 +520,7 @@
 
                 <p>Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.</p>
 
-                <img src="img/cushion-worker.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/cushion-worker.png" alt="Cushion Worker" class="img-fluid tm-img-tn">
 
               </section>
               <section id="future" class="tm-section">
