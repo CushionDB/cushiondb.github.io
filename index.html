@@ -476,13 +476,13 @@
                 </p>
 
                 <p>
-                  The first step to getting the backend ready is to clone this repo. The next step is to run the <code>cushion-backend-init</code> script from within the cloned directory. This script will prompt the developer for information that will be used for various configurations for the two backend containers.
+                  The first step to getting the backend ready is to clone the CushionBackend repo. The next step is to run the <code>cushion-backend-start</code> script from within the cloned directory. When you run it the first time this script will prompt the developer for information that will be used for various configurations for the two backend containers.
                 </p>
 
                 <img src="img/cushion-backend-init.gif" alt="Cushion Backend Start" class="img-fluid tm-img-tn">
 
                 <p>
-                  Once the configurations are done, the containers can be built and run. Rather than explicitely running the <code>docker-compose up</code> command, the <code>cushion-backend-start</code> script should be run. This script will first verify that configuration files are in place, then run <code>docker-compose up</code>.
+                  Once the configurations are done the script runs docker-compose in the background. If the configs change at a later point <code>cushion-backend-init</code> is the command for resubmitting the app's configuration.
                 </p>
 
                 <img src="img/cushion-backend-start.gif" alt="Cushion Backend Start" class="img-fluid tm-img-tn">
@@ -538,7 +538,7 @@
                   Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.
                 </p>
 
-                <img src="img/signout.png" alt="Destroy Local Database Option" class="img-fluid tm-img-tn">
+                <img src="img/signout.png" style="width: 40%;" alt="Destroy Local Database Option" class="img-fluid tm-img-tn">
 
                 <h3>Service Worker Data Flow</h3>
                 <p>
