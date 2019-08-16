@@ -222,7 +222,7 @@
                 <p>We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices. This might look strange at first, but it is a rather common NoSQL data structure that most, if not all, offline first set ups utilize. If we wanted to include group data (for example to share todos between contacts or within a company) we would set up a database-per-role (or per-group), and so on.</p>
                 <h5>Authentication for DB per User architecture</h5>
                 <p>In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, i.e., the users would authenticate with the application layer. In a database per user architecture, each user is the admin of their own database. The users will have to authenticate with their own database in order to make changes and get data from the server.</p>
-                    <img src="img/authentication-trad.png" alt="Image" class="img-fluid tm-img-tn">    
+                    <img src="img/Authentication.png" alt="Image" class="img-fluid tm-img-tn">    
 
                 <p>Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.</p>
               </section>  
@@ -255,7 +255,7 @@
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
 
 
-                    <img src="img/cushiondb-pro-cons.png" alt="Image" class="img-fluid tm-img-tn">    
+                    <img src="img/CushionProsCons.png" alt="Image" class="img-fluid tm-img-tn">    
 
               </section>  
 
