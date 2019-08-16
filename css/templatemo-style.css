@@ -365,3 +365,13 @@ h1, h2, h3, h4, h5 {
 #about ul {
   text-align: center;
 }
+
+#references ul a {
+font-size: 0.9rem;
+color: #515151;
+}
+
+#references li {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
