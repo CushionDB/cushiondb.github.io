@@ -1,5 +1,4 @@
 # API 
---------
 
 ## Store API
 
@@ -50,39 +49,50 @@ store.find(fieldName, fieldValue).then( docs => {
 
 #### store.delete(documentID)
 ```js
+store.delete(documentID).then(id => {
+  //
+});
 
 ```
 
 #### store.destroy()
 ```js
+store.destroy().then( res => {
+ // 
+});
 
 ```
 
 #### store.deleteAll()
 ```js
+store.deleteAll().then(res => {
+  // 
+});
 
 ```
 
 
 ## Account API
 
-#### account.isSignedIn()
+#### account.signUp()
 ```js
-
+account.signUp({username, password}).then( res => {
+  //
+});
 ```
-
-#### account.signUp( { username, password } )
-```js
-
-```
-
 #### signIn({username, password})
 ```js
+account.signIn({ 'John', 'secret' }).then( res => {
+  //
+});
 
 ```
 
 #### signOut()
 ```js
+account.signOut().then( res => {
+  //
+});
 
 ```
 
