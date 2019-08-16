@@ -153,9 +153,9 @@
                 <p>To make sure there are not thousands of service workers doing work in the background and draining the user’s battery, service workers are not active by default. They are only activated in order to respond to different events, and are killed by the browser when they’re done with their task. Browsers also reserve the right to kill a service worker that has been active for too long. A small sample of service workers events:</p>
 
                 <ul>
-                  <li>`install` - occurs when the SW is first installed on the browser</li>
-                  <li>`fetch` - occurs when the browser makes an HTTP request to the server</li>
-                  <li>`sync` - occurs when the browser detects a connection after being offline</li>
+                  <li><code>`install` </code> occurs when the SW is first installed on the browser</li>
+                  <li><code>`fetch` </code> occurs when the browser makes an HTTP request to the server</li>
+                  <li><code>`sync` </code> occurs when the browser detects a connection after being offline</li>
                 </ul>
 
                 <p>To make sure service workers cannot alter things other the the website with which they came, the scope of what a service worker can do is limited to where it lives in the code - A service worker cannot access any files sitting above it in the folder structure. Moreover, when a service worker is activated while an app is closed a browser will either notify the user (Chrome), or limit the number of times it is allowed to be triggered (Mozilla).</p>
@@ -236,11 +236,10 @@
                 <h3>CouchDB & PouchDB</h3>
                 <p>CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a seperate _users database that stores all admins and their salted password-digests.</p>
 
+                <p> <img src="img/pouchdb.png" alt="Image" class="img-fluid tm-img-tn">    </p>
+
                 <p>CouchDB can be used in tandem with PouchDB - an IndexedDB wrapper that acts as a CouchDB node on the client side. It has the same syncing protocol, and makes replicating databases between client and server very easy.</p>
 
-                <p>
-                    <img src="img/pouchdb.png" alt="Image" class="img-fluid tm-img-tn">    
-                </p>
 
                     <img src="img/pouchdb-p-c.png" alt="Image" class="img-fluid tm-img-tn">    
 
@@ -337,23 +336,23 @@
                 <h3>Using CushionDB</h3>
                     <img src="img/cushionAPI.png" alt="Image" class="img-fluid tm-img-tn">    
 
-                <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a `cushiondb` object in their front end code. This object gives the developer access to the `store` and `account` APIs.</p>
+                <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a <code>`cushiondb` </code>object in their front end code. This object gives the developer access to the <code>`store`</code> and <code>`account`</code> APIs.</p>
 
 
 
                 <h5>`cushiondb.store`</h5>
 
-                <p>The `store` API exposes methods for the typical CRUD operations used for managing user data. The developer can treat the CushionStore as a typical runtime store object which returns promises. The store always persists that data both in the user’s device, and if the user is signed up and signed in, also persists it on the server.</p>
+                <p>The <code>`store`</code> API exposes methods for the typical CRUD operations used for managing user data. The developer can treat the CushionStore as a typical runtime store object which returns promises. The store always persists that data both in the user’s device, and if the user is signed up and signed in, also persists it on the server.</p>
 
-                <p>The store also exposes a `subscribe` method, which accepts a callback to be called whenever a change occurs on the local database. This is useful for re-rendering the page whenever a change is made.</p>
+                <p>The store also exposes a <code>`subscribe`</code> method, which accepts a callback to be called whenever a change occurs on the local database. This is useful for re-rendering the page whenever a change is made.</p>
 
                 <p>[insert gif from console crud ops]</p>
 
                 <h5>`cushiondb.account`</h5>
 
-                <p>The `account` API exposes methods for typical user authentication ops. Signing up a user creates a new user_db on the server, and enable server replication of data.</p>
+                <p>The <code>`account` </code>API exposes methods for typical user authentication ops. Signing up a user creates a new user_db on the server, and enable server replication of data.</p>
 
-                <p>The `account` API also has a `subscribeToPushUpdates` method which asks the user for permission to update their current device when changes are made on the server, and adds the device to the user’s devices that will get automatically updated if the user grants permission.</p>
+                <p>The <code>`account` </code>API also has a <code>`subscribeToPushUpdates` </code>method which asks the user for permission to update their current device when changes are made on the server, and adds the device to the user’s devices that will get automatically updated if the user grants permission.</p>
 
                 <p>[insert gif from console account ops]</p>
                 <h3>CushionWorker</h3>
@@ -452,113 +451,6 @@ Our team of three software engineers collaborated remotely across North America 
                 </ul>
                 </p>
               </section>  
-
-              <!-- About section -->
-              <!-- <section id="" class="tm-section"> -->
-              <!--   <div class="row"> -->                                                                
-              <!--     <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12 push-lg-4 push-md-5"> -->
-              <!--       <header> -->
-              <!--         <h2 class="tm-blue-text tm-section-title tm-margin-b-45"></h2> -->
-              <!--       </header> -->
-              <!--       <a href="#" class="tm-button tm-button-wide">Read More</a> -->  
-              <!--     </div> -->
-
-              <!--     <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 pull-lg-8 pull-md-7 tm-about-img-container"> -->
-              <!--       <img src="img/neaty-02.jpg" alt="Image" class="img-fluid"> -->    
-              <!--     </div> -->  
-              <!--   </div> -->                            
-              <!-- </section> -->  
-
-              <!-- Gallery One section -->     
-              <!-- <section id="galleryone" class="tm-section"> -->
-              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Gallery One</h2></header> -->
-              <!--   <div class="tm-gallery-container tm-gallery-1"> -->
-              <!--     <div class="tm-img-container tm-img-container-1"> -->
-              <!--       <img src="img/neaty-03.jpg" alt="Image" class="img-fluid tm-img-tn"> -->
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-1"> -->
-              <!--       <a href="img/neaty-04.jpg"><img src="img/neaty-04.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-1"> -->
-              <!--       <a href="img/neaty-05.jpg"><img src="img/neaty-05.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-1"> -->
-              <!--       <a href="img/neaty-06.jpg"><img src="img/neaty-06.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-1"> -->
-              <!--       <a href="img/neaty-07.jpg"><img src="img/neaty-07.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->                                    
-              <!--   </div> -->
-              <!-- </section> -->
-
-              <!-- Second Gallery section -->     
-              <!-- <section id="secondgallery" class="tm-section"> -->
-              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Second Gallery</h2></header> -->
-              <!--   <div class="tm-gallery-container tm-gallery-2"> -->
-              <!--     <div class="tm-img-container tm-img-container-2"> -->
-              <!--       <a href="img/neaty-08.jpg"><img src="img/neaty-08.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-2"> -->
-              <!--       <a href="img/neaty-09.jpg"><img src="img/neaty-09.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-2"> -->
-              <!--       <a href="img/neaty-10.jpg"><img src="img/neaty-10.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->                                    
-              <!--   </div> -->
-              <!-- </section> -->
-
-              <!-- Third Gallery section -->     
-              <!-- <section id="thirdgallery" class="tm-section"> -->
-              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Third Gallery</h2></header> -->
-              <!--   <div class="tm-gallery-container tm-gallery-3"> -->
-              <!--     <div class="tm-img-container tm-img-container-3"> -->
-              <!--       <a href="img/neaty-11.jpg"><img src="img/neaty-11.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->    
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-3"> -->
-              <!--       <a href="img/neaty-12.jpg"><img src="img/neaty-12.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-3"> -->
-              <!--       <a href="img/neaty-13.jpg"><img src="img/neaty-13.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
-              <!--     </div> -->
-              <!--     <div class="tm-img-container tm-img-container-3"> -->
-              <!--       <a href="img/neaty-14.jpg"><img src="img/neaty-14.jpg" alt="Image" class="img-fluid tm-img-tn"></a> -->
-              <!--     </div> -->                                    
-              <!--   </div> -->
-              <!-- </section> -->
-
-              <!-- Contact Us section -->
-              <!-- <section id="contact" class="tm-section"> -->
-              <!--   <header><h2 class="tm-blue-text tm-section-title tm-margin-b-30">Contact Us</h2></header> -->
-
-              <!--   <div class="row"> -->
-              <!--     <div class="col-lg-6"> -->
-              <!--       <form action="#contact" method="post" class="contact-form"> -->
-              <!--         <div class="form-group"> -->
-              <!--           <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/> -->
-              <!--         </div> -->
-              <!--         <div class="form-group"> -->
-              <!--           <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/> -->
-              <!--         </div> -->
-              <!--         <div class="form-group"> -->
-              <!--           <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea> -->
-              <!--         </div> -->                                            
-              <!--         <button type="submit" class="float-right tm-button">Send</button> -->
-              <!--       </form> -->    
-              <!--     </div> -->
-
-              <!--     <div class="col-lg-6 tm-contact-right"> -->
-              <!--       <p> -->
-              <!--       Nullam vivera fermentum purus id blandit. Phasellus lacus mi, porta vel sodales nec, faucibus non eros. Nulla at quam vel risus laoreet tincidunt in in sem. -->    
-              <!--       </p> -->
-              <!--       <address> -->
-              <!--         11/22 Etiam mauris erat,<br> -->
-              <!--         Vestibulum eu augue nec, 10220<br> -->
-              <!--         Nam consequat -->
-              <!--       </address> -->
-              <!--     </div> -->
-              <!--   </div> -->
-
-              <!-- </section> -->
               <footer>
               </footer>
             </div>  
