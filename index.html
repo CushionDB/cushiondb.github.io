@@ -189,7 +189,7 @@
                   The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.
                 </p>
 
-                <img src="img/service-worker-detail.png" style="width: 70%"alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/service-worker-detail.png" alt="Image" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.
@@ -283,7 +283,7 @@
 
                 <p>Our new data structure might resemble something like this:</p>
 
-                <img src="img/indexeddb.png" alt="IndexedDB" class="img-fluid tm-img-tn">
+                <img src="img/indexeddb.png" alt="IndexedDB" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.
@@ -306,7 +306,7 @@
                 <p>
                   This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.
                 </p>
-                <img src="img/leader-follower.png" alt="Leader Follower" class="img-fluid tm-img-tn">
+                <img src="img/leader-follower.png" alt="Leader Follower" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.
@@ -333,7 +333,7 @@
                 <h4>Final Data Structure</h4>
                 <p>Our final data structure will look something like this:</p>
 
-                <img src="img/multi-leader.png" alt="Final data structure" class="img-fluid tm-img-tn">
+                <img src="img/multi-leader.png" alt="final data structure" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices.
@@ -387,7 +387,7 @@
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
 
 
-                <img src="img/CushionProsCons.png" alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
+                <img src="img/CushionProsCons.png" style="padding-bottom: 0;"alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
 
               </section>
 
@@ -405,7 +405,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p>
 
-                <img src="img/no-cell-reception.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
+                <img src="img/no-cell-reception.png" alt="Todo Mismatch" class="img-fluid tm-img-tn smaller">
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -490,7 +490,7 @@
 
                 <p>For any other service worker functionality (like fetch events) developers will add their own scripts to the auto-created sw.js file as they would normally.</p>
 
-                <img src="img/cushion-worker-api.png" alt="Cushion Worker API" class="img-fluid tm-img-tn">
+                <img src="img/cushion-worker-api.png" style="width: 35%;" alt="Cushion Worker API" class="img-fluid tm-img-tn">
               </section>
               <section id="challenges" class="tm-section">
                 <header>

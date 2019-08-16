@@ -151,6 +151,10 @@ p { line-height: 1.75; }
 	font-size: 1.3rem;
 }
 
+.smaller {
+	width: 68%;
+}
+
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
 	color: #4286ab !important;
