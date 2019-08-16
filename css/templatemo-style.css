@@ -58,8 +58,16 @@ color:#fff ;
 }
 
 .tm-logo-div { 
-	padding-top: 40px; 
-	padding-bottom: 40px;
+	padding-top: 15px; 
+	padding-bottom: 25px;
+}
+
+.tm-logo-div img {
+	width: 75%;
+}
+
+.tm-logo-div h5 {
+	font-size: 75%;
 }
 
 .tm-main-nav { display: none; }
@@ -183,6 +191,8 @@ textarea:-ms-input-placeholder {
 
 @media (min-width: 992px) {
 	.tm-main-nav {
+		padding-left: 20px;
+		width: 80%;
 		display: flex;
 		justify-content: center;
 	}
@@ -214,8 +224,8 @@ textarea:-ms-input-placeholder {
 	}
 
 	.tm-logo-div {
-	    padding-top: 50px;
-	    padding-bottom: 50px;
+	    padding-top: 20px;
+	    padding-bottom: 35px;
 	}
 
 	.tm-section { margin-bottom: 100px; }
@@ -288,10 +298,10 @@ textarea:-ms-input-placeholder {
 }
 
 @media (max-height: 860px) {
-	.tm-left-column {overflow: scroll;}
+	.tm-left-column {overflow: hidden;}
 	.tm-logo-div {
-	    padding-top: 50px;
-	    padding-bottom: 50px;
+	    padding-top: 20px;
+	    padding-bottom: 35px;
 	}
 
 	.tm-nav-item { font-size: 1.2rem; }
@@ -304,8 +314,8 @@ textarea:-ms-input-placeholder {
 
 @media (min-height: 859px) {
 	.tm-logo-div {
-	    padding-top: 40px;
-	    padding-bottom: 40px;
+	    padding-top: 15px;
+	    padding-bottom: 25px;
 	}
 
 	.tm-nav-item {font-size: 1.2rem;}
