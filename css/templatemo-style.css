@@ -62,7 +62,14 @@ color:#fff ;
 	padding-bottom: 40px;
 }
 
-.tm-main-nav { display: none; }
+.tm-logo-div h5 { 
+	margin-top: 0;
+}
+
+.tm-main-nav { 
+	display: none;
+	padding: 10px 0 0 10px;
+}
 
 .tm-main-nav-ul {
 	display: inline-block;
@@ -218,6 +225,14 @@ textarea:-ms-input-placeholder {
 	    padding-bottom: 50px;
 	}
 
+	.tm-logo-div img {
+		width: 70%;
+	}
+
+	.tm-logo-div h5 {
+		font-size: 1rem;
+	}
+
 	.tm-section { margin-bottom: 65px; }
 
 	.tm-content-div {padding: 80px 25%  30px 120px;}
@@ -354,7 +369,8 @@ h5 {
 }
 
 .tm-main-nav  li {
-  padding: 5px 0 12px 0;
+	font-size: 1rem;
+  padding: 5px 0 15px 0;
 }
 
 .tm-left-column h5 {
