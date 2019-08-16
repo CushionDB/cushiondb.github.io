@@ -514,7 +514,7 @@
                   Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.
                 </p>
 
-S
+
                 <h3>Service Worker Data Flow</h3>
                 <p>
                   Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.
