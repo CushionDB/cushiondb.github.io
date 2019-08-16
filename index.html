@@ -189,7 +189,7 @@
                   The Service Worker is the tool that glues all of these tools together. It’s a JavaScript file that is installed on the browser the first time a user visits a web page, and is positioned between the front and the back end. It runs on a separate thread from the app, and can intercept requests made by the browser or responses from the server, and programmatically return responses. And because service workers are installed on the browser, they do not go away when the app is closed - this is how most PWA magic happens.
                 </p>
 
-                <img src="img/service-worker-detail.png" style="width: 70%"alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/service-worker-detail.png" alt="Image" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   For example, to serve cached resources, the service worker could intercept a request made by the browser, and respond with the cached resource instead of allowing the request to continue to the server. To display a push notification, the service worker must intercept the push request from the push API and relay the message to the Notification API on the user’s device.
@@ -283,7 +283,7 @@
 
                 <p>Our new data structure might resemble something like this:</p>
 
-                <img src="img/indexeddb.png" alt="IndexedDB" class="img-fluid tm-img-tn">
+                <img src="img/indexeddb.png" alt="IndexedDB" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   An IndexedDB dataset named after the user’s username, with objects keyed by the todo’s id.
@@ -306,7 +306,7 @@
                 <p>
                   This approach is traditionally used to take the load off of the leader node by delegating all read-queries to followers, and could be translated to the offline first model as well.
                 </p>
-                <img src="img/leader-follower.png" alt="Leader Follower" class="img-fluid tm-img-tn">
+                <img src="img/leader-follower.png" alt="Leader Follower" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   We can design our app so that the server-side DB will serve as a leader, and will perform all of the writes. The the client-side databases will act as followers, taking the read-queries. When the user is offline, we will treat it as a temporary leader-failover, giving the client side database write privileges.
@@ -333,7 +333,7 @@
                 <h4>Final Data Structure</h4>
                 <p>Our final data structure will look something like this:</p>
 
-                <img src="img/multi-leader.png" alt="Final data structure" class="img-fluid tm-img-tn">
+                <img src="img/multi-leader.png" alt="final data structure" class="img-fluid tm-img-tn smaller">
 
                 <p>
                   We are, in effect, creating a new database on the server per every new user, and this database is acting as the coordinator between multiple leader-replicas of the database which live on the user’s devices.
@@ -387,7 +387,7 @@
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the Couch and Pouch details and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, introducing installed capabilities like syncing when the app is closed and better handling of the offline state.</p>
 
 
-                <img src="img/CushionProsCons.png" alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
+                <img src="img/CushionProsCons.png" style="padding-bottom: 0;"alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
 
               </section>
 
@@ -405,7 +405,7 @@
 
                 <p>When he gets to work he opens up the todos app on his laptop, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p>
 
-                <img src="img/todo-mismatch.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
+                <img src="img/no-cell-reception.png" alt="Todo Mismatch" class="img-fluid tm-img-tn smaller">
 
                 <p>Of Course the data lives on in his mobile, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
                 <h5>CushionDB’s Solution</h5>
@@ -419,6 +419,7 @@
 
                 <h5>Scenario cont…</h5>
                 <p>With his todos synced, Bob gets to work on his laptop. As new tasks come in he adds them to a new list for tomorrow's todos. The next morning, he is on the subway again, without reception, and opening up the app to go over his todos on his phone, he finds that his tomorrow's todo list - the one he made yesterday in the office - is missing.</p>
+                <img src="img/no-cell-2.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
 
                 <p>Because he was offline when he opened up the app, the changes on the server could not be synced to his device.</p>
 
@@ -436,7 +437,7 @@
                   The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.
                 </p>
 
-                <img src="img/notification-api.png" alt="Notifications" class="img-fluid tm-img-tn">
+                <img src="img/sync-manager-flow-diagram.png" alt="Notifications" class="img-fluid tm-img-tn">
 
                 <p>
                   Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.
@@ -512,7 +513,7 @@
 
                 <p>For any other service worker functionality (like fetch events) developers will add their own scripts to the auto-created sw.js file as they would normally.</p>
 
-                <img src="img/cushion-worker-api.png" alt="Cushion Worker API" class="img-fluid tm-img-tn">
+                <img src="img/cushion-worker-api.png" style="width: 35%;" alt="Cushion Worker API" class="img-fluid tm-img-tn">
               </section>
               <section id="challenges" class="tm-section">
                 <header>
@@ -520,29 +521,52 @@
                   <hr />
                 </header>
 
-                <p>In the process of designing and engineering our framework, we considered tradeoffs to maximize ease of use and automation, while minimizing configuration complexities. In this section we will explore some of the more interesting design decisions and challenges we faced  during development.</p>
+                <p>
+                  In the process of designing and engineering our framework, we considered trade-offs to maximize ease of use and automation, while minimizing configuration complexities. In this section we will explore some of the more interesting design decisions and challenges we faced  during development.
+                </p>
+
                 <h3>One User per Device</h3>
-                <p>Being an in-browser database, the interaction with IndexedDB is slightly different from other databases. The main difference is the lack of authentication on the browser. By going to the developer tools anyone can see all of the data that belongs to this origin’s IndexedDB (domain or subdomain). In order to prevent data from being visible while the user is logged out IndexedDB is usually destroyed between sessions. This of course improves security, but adds load time for fetching data from the server, and if something was not replicated to the server before the user logged out it also means data-loss.</p>
+                <p>
+                  Being an in-browser database, the interaction with IndexedDB is slightly different from other databases. The main difference is the lack of authentication on the browser. By going to the developer tools anyone can see all of the data that belongs to this origin’s IndexedDB (domain or sub-domain). In order to prevent data from being visible while the user is logged out IndexedDB is usually destroyed between sessions. This of course improves security, but adds load time for fetching data from the server, and if something was not replicated to the server before the user logged out it also means data-loss.
+                </p>
 
-                <p>Conversely, many native apps that deal with not-so-sensitive data do not require users to log in to view their data. The assumption is that the user has some screen lock on their phone, and that they are well-aware that some things (such as a credit card number) should not be stored in a note-taking app.</p>
+                <p>
+                  Conversely, many native apps that deal with not-so-sensitive data do not require users to log in to view their data. The assumption is that the user has some screen lock on their phone, and that they are well-aware that some things (such as a credit card number) should not be stored in a note-taking app.
+                </p>
 
-                <p>Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.</p>
+                <p>
+                  Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.
+                </p>
 
                 <img src="img/signout.png" alt="Destroy Local Database Option" class="img-fluid tm-img-tn">
 
                 <h3>Service Worker Data Flow</h3>
-                <p>Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.</p>
+                <p>
+                  Working with the service worker prompted us to start thinking of data flow a little bit differently. While the application is running it can send data to the service worker via messages. However, the service worker is installed and can respond to events while the app is not running, and in these instances it cannot rely on the application for data. Furthermore, the service worker has no access to localStorage, the in-browser persistent key-value store.
+                </p>
 
-                <p>How would a service worker responding to an event while the app is closed know who the user is, whether they are signed in, what database should they push changes to, etc?</p>
+                <img src="./img/arc-close-up.png" class="img-fluid tm-img-tn">
 
-                <p>What we ended up doing is creating a meta-database in IndexedDB which stores user information and is deleted when the user is signed out.</p>
+                <p>
+                  How would a service worker responding to an event while the app is closed know who the user is, whether they are signed in, what database should they push changes to, etc?
+                </p>
+
+                <p>
+                  What we ended up doing is creating a meta-database in IndexedDB which stores user information and is deleted when the user is signed out.
+                </p>
 
                 <h3>Service Worker Event Hijacking</h3>
-                <p>As we saw in the Using CushionDB section CushionDB enables developers to add push notifications and other SW events using the CushionWorker API. Although this is a welcome functionality, as you may have noticed, it seems somewhat extraneous to our offline-first data management framework.</p>
+                <p>
+                  As we saw in the Using CushionDB section CushionDB enables developers to add push notifications and other SW events using the CushionWorker API. Although this is a welcome functionality, as you may have noticed, it seems somewhat extraneous to our offline-first data management framework.
+                </p>
 
-                <p>The reasoning behind this API is that every application can only have one service worker, and service workers cannot have multiple events of the same type. By using the service worker for our purposes we disabled the developer from creating their own push notifications, or messaging between the SW and the main thread for example.</p>
+                <p>
+                  The reasoning behind this API is that every application can only have one service worker, and service workers cannot have multiple events of the same type. By using the service worker for our purposes we disabled the developer from creating their own push notifications, or messaging between the SW and the main thread for example.
+                </p>
 
-                <p>Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.</p>
+                <p>
+                  Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.
+                </p>
 
                 <img src="img/cushion-worker.png" alt="Cushion Worker" class="img-fluid tm-img-tn">
 
