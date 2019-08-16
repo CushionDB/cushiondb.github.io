@@ -168,7 +168,7 @@
                 <p>
                   The Push API is capable for pushing messages from the server to the service worker on the client (more on service workers later), and the Notifications API interacts with the user’s OS, pushing the notification to the OS’ UI.
                 </p>
-                <img src="img/pushAPI.png" alt="Image" class="img-fluid tm-img-tn">
+                <img src="img/pushApi.png" alt="Image" class="img-fluid tm-img-tn">
 
                 <h3>Cache API</h3>
                 <p>
@@ -499,15 +499,12 @@
 
                 <p>The store also exposes a <code>`subscribe`</code> method, which accepts a callback to be called whenever a change occurs on the local database. This is useful for re-rendering the page whenever a change is made.</p>
 
-                <p>[insert gif from console crud ops]</p>
-
                 <h5>`cushiondb.account`</h5>
 
                 <p>The <code>`account` </code>API exposes methods for typical user authentication ops. Signing up a user creates a new user_db on the server, and enable server replication of data.</p>
 
                 <p>The <code>`account` </code>API also has a <code>`subscribeToPushUpdates` </code>method which asks the user for permission to update their current device when changes are made on the server, and adds the device to the user’s devices that will get automatically updated if the user grants permission.</p>
 
-                <p>[insert gif from console account ops]</p>
                 <h3>CushionWorker</h3>
                 <p>CushionDB takes care of registering the service worker and all cushionDB related functions will work out of the box. CushionDB also enables developers to add their own push notifications, message and sync events which will piggie-back on CushionDB’s existing SW configuration.</p>
 
