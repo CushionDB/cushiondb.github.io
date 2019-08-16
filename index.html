@@ -514,7 +514,6 @@
                   Since we are dealing with apps that should be able to function as a native app, we decided to allow the developer to choose whether or not to clear client side data on logout using an options object.
                 </p>
 
-                <p>[add screenshot of code]</p>
 
                 <h3>Service Worker Data Flow</h3>
                 <p>
@@ -540,13 +539,9 @@
                   The reasoning behind this API is that every application can only have one service worker, and service workers cannot have multiple events of the same type. By using the service worker for our purposes we disabled the developer from creating their own push notifications, or messaging between the SW and the main thread for example.
                 </p>
 
-<<<<<<< HEAD
                 <p>
                   Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.
                 </p> 
-=======
-                <p>Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.</p>
->>>>>>> cb3f24925360806c1a70578b41e27026a9cf003d
 
                 <img src="img/cushion-worker.png" alt="Cushion Worker" class="img-fluid tm-img-tn">
 
