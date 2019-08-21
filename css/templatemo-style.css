@@ -29,6 +29,18 @@ a:focus {
 	outline: none;
 }
 
+#floating-icon {
+	background-image: url("../icons/github-logo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 0 0;
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+	width: 80px;
+	height: 80px;
+}
+
 .row { display: block; }
 .tm-left-right-container { width: 100%; }
 
