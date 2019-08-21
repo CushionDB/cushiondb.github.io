@@ -354,15 +354,23 @@
 
                 <h4>Authentication for DB per User architecture</h4>
                 <p>
-                  In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server, and access to the database is orchestrated through an application layer. In a one-database-per-user architecture, each user is the admin of their own database. Each user will have to authenticate with their own database in order to make changes and get data from the server.
+                  In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server. In order to make changes a user would authentication with the application layer, and the latter would make changes to the database.
+
+                  In a one-database-per-user architecture however, as we will soon see, there is a strong preference  for having each user as the admin of their own database, and authenticating with is - bypassing the application layer.
                 </p>
 
                 <img src="img/authentication.png" alt="Image" class="img-fluid tm-img-tn">
 
                 <p>
-                  Having our users authenticate with the database directly will make syncing, authenticating and database security a lot simpler.
+                  Having our databases in both ends mirror each other closely with our users authenticating directly with the database will make syncing, authentication, database security and scaling a lot simpler.
                 </p>
 
+                <h3>Data Structure Summary</h3>
+                <p>
+                  It's easy to see at this point that setting up an offline-first web app is not a trivial task. Notably syncing IndexedDB, a hard to use database in its own right, between devices and maintaining multiple admins that interact with the database around the application layer are not things we expect to deal with when designing simple single-user apps.
+
+                  Due to the appeal and complexity of this setup some tools and frameworks have popped up to make writing offline-first easier. We will explore some of them in the following section.
+                </p> 
               </section>
               <section id="solutions" class="tm-section">
 
@@ -371,18 +379,16 @@
                   <hr />
                 </header>
 
-                <p>
-                  As we just saw from the above walk-through, setting up an offline-first web app is not a trivial task. Due to the complexity of syncing databases and managing multiple admins, some tools and frameworks have been developed in order to help developers create offline-first web applications easier.
-                </p>
-
                 <h3>CouchDB & PouchDB</h3>
                 <p>
-                  CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a separate _users database that stores all admins and their salted password-digests.
+                  CouchDB is an open source document database that can be accessed through HTTP entirely and specializes in syncing. It is optimized for the multi-leader model, which makes it a natural choice for offline first data management. It supports the db-per-user model with some configuration, and can take care of user authentication with a separate <code>_users</code> database that stores all admins and their salted password-digests.
                 </p>
 
                 <img src="img/pouchdb.png" alt="pouchDB code" class="img-fluid tm-img-tn">
 
                 <p>CouchDB can be used in tandem with PouchDB - an IndexedDB wrapper that acts as a CouchDB node on the client side. It has the same syncing protocol, and makes replicating databases between client and server very easy.</p>
+
+                <p>Pros and cons of the Couch&Pouch model:</p>
 
                 <img src="img/pouchdb-p-c.png" alt="Image" class="img-fluid tm-img-tn">
 
@@ -391,11 +397,14 @@
 
                 <p>Syncing with Hoodie is very similar to the Pouch & Couch model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
 
+                <p>Pros and cons of Hoodie:</p>
+
                 <img src="img/hoodie-p-c.png" alt="Hoodie Pros Cons" class="img-fluid tm-img-tn">
 
                 <h3>CushionDB</h3>
                 <p>CushionDB is similar to Hoodie in many ways - it abstracts data management to a simple object that hides the interaction and setup between CouchDB and PouchDB and takes care of user authentication. It expands on this model by being PWA compliant, which means it utilizes PWA tools that can take the offline-first model a step further, adding native application capabilities to web applications, like syncing when the app is closed and better handling of offline usage.</p>
 
+                <p>Pros and cons of CushionDB:</p>
 
                 <img src="img/CushionProsCons.png" style="padding-bottom: 0;"alt="CushiondDB Pros Cons" class="img-fluid tm-img-tn">
 
@@ -411,48 +420,82 @@
 
                 <p>In this section we will dig deeper into CushionDB's architecture. To set the stage, let's examine what it means for an offline-first framework to be PWA compliant. To do this we will look at hypothetical scenario.</p>
 
-                <h5>Scenario</h5>
-                <p>Let’s assume Bob is using our todo app. He is on the subway on the way to work in the morning, and opens the todos app <em>on his phone</em> to add some work tasks for the day. Our web app is offline-first so despite having no connection on the subway he can open the app and adds a to-do list for the day.</p>
+                <h5>Scenario 1</h5>
+                <p>
+                  Our user will be Jenny - a volunteer out on a mission with a non-profit in a remote location who happens to use our todo app. At night she is at a room that has wi-fi, but during the day she is running around in areas with spotty reception at best.
+                </p>
 
-                <p>When he gets to work he opens up the todos app <em>on his laptop</em>, only to find that his new list is gone. Because Bob opened, updated, and closed the app while being offline, the data was never synced from his phone to the server.</p>
+                <p>
+                  Jenny is out for the day, and during her launch break she opens the todo app and creates a todo list for tomorrow based on the morning's work. Our web app is offline-first so despite having no reception on the she can open the app and add a to-do list without any issues. She closes the app and doesn't think about it.
+                </p>
+
+                <p>
+                  However, not being a progressive web app, once Jenny closed the app her phone will not attempt to connect with the server. The new list will never make it to the server.
+                </p>
 
                 <img src="img/no-cell-reception.png" alt="Todo Mismatch" class="img-fluid tm-img-tn smaller">
 
-                <p>Of course the data is still in his phone, but we can see that our app is currently only offline first so long as the app is open and online at some point during the session.</p>
-
-                <h5>CushionDB’s Solution</h5>
-                <p>CushionDB puts database syncing on the service worker, and in this way is able to utilize the service worker’s `sync` event, which fires when the browser detects a network connection is restored after being offline. Whenever the local database has changes made to it, CushionDB registers a Couch->Pouch sync to be called when the browser is connected. If the network is available, the callback is called right away, otherwise it is added to the browser’s syncManager’s queue, and called when the sync event is fired.</p>
-
-
-                <p>Sync manager attempts to call the callback function until it succeeds or until it hits a attempt-limit. If a limit is reached, the browser will send a push notification to inform the user that some data was not synced and that intervention (reopening the app) is required.</p>
-
-                <p>With CushionDB, our todo app will sync with the server when Bob gets out of the subway and his mobile device detects a network - regardless of whether the app is open or not.</p>
-
-
-                <h5>Scenario cont…</h5>
-                <p>With his todos synced, Bob gets to work on his laptop. As new tasks come in he adds them to a new list for tomorrow's todos. The next morning, he is on the subway again, without reception, and opening up the app to go over his todos on his phone, he finds that his tomorrow's todo list - the one he made yesterday in the office - is missing.</p>
-                <img src="img/no-cell-2.png" alt="Todo Mismatch" class="img-fluid tm-img-tn">
-
-                <p>Because he was offline when he opened up the app and the laptop changes were made when the app was not open, the changes on the server were not synced to his phone.</p>
-
-                <h5>CushionDB’s Solution</h5>
-
                 <p>
-                  CushionDB utilizes push notifications to push changes to the user’s devices even when the app is not running.
+                  When she gets back to the hotel she opens up the todos app <em>on her laptop</em> only to find that the new list is gone.
                 </p>
 
                 <p>
-                  Following the user accepting notifications from the app (which is optional), CushionDB adds the user’s device to the user’s database document on the server. When a change is successfully synced to the server, the user’s active device makes a request to the CushionServer, which triggers a ‘push’ event with the service worker on the user’s other registered devices - all devices other than the one that made the request.
+                  In order to get the new list to her computer she will have to open the app on her cellphone again, now that reception is available - far from ideal. CushionDB however can push the data to the server while the app is closed. Let's examine how this is achieved.
+                </p>
+
+                <h5>CushionDB’s Solution</h5>
+                <p>
+                  CushionDB syncs the databases through the service worker's syncManager. Whenever a change is made to the local database CushionDB sends a message to the service worker which queues a callback that pushes the local changes to the remote database. 
+
+                  <img src="img/arch-service-worker-sync.png" alt="SW sync" class="img-fluid tm-img-tn">
+
+                  syncManager will either call the callback right away, or wait until a network is available. When network is detected syncManager attempts to call the callback function until it succeeds, or until it hits a attempt-limit. 
+
+                  If a limit is reached, the browser will send a push notification to inform the user that some data was not synced and that intervention (reopening the app) is required.
                 </p>
 
                 <p>
-                  The push event triggers a notification telling the user that work is being done in the background, and a data pull from the server.
+                  By syncing through the service worker CushionDB is able to update the remote database while the application is closed, as long as the device has a network connection. 
+
+                  In this way CushionDB is also able to wait for the network rather than pinging the server to check whether the connection is restored (a common network-check pattern) when the app is running, which reduces the drain on the battery.
+                </p>
+
+                <h5>Scenario 2</h5>
+                <p>
+                  Let's go back to Jenny. She is in her wifi equipped room, making updates to her todos for tomorrow. She closes the app and goes to sleep. The next day, on the road (reception-less), she opens the todo app on her cellphone - but her new todos are not there.
+
+                  Even though her cellphone <em>did</em> have reception overnight - the app was not open, and couldn't initiate a fetch for the changes on the server. Jenny will now have to wait until she has reception again <em>and</em> her app is open to get the new todos.
+
+                  <img src="img/no-cell-2.png" alt="no reption 2" class="img-fluid tm-img-tn">
+                </p>
+
+                <p>
+                  CushionDB's PWA capabilities enable it to pull data from the database while the app is not open. Let's examine how this is done.
+                </p>
+
+                <h5>CushionDB’s Solution</h5>
+
+                <p>
+                  CushionDB utilizes the Push and Notification APIs to push changes to the user’s devices even when the app is closed
+                </p>
+
+                <p>
+                  Following the user allowing notifications from the app (which is optional), CushionDB adds the user’s device to the user’s database document on the server. When a change is successfully synced to the server, the user’s active device makes a request to the CushionServer, which triggers a ‘push’ event with the service worker on the user’s other registered devices - all devices other than the one that made the request.
                 </p>
 
                 <img src="img/sync-manager-flow-diagram.png" alt="Notifications" class="img-fluid tm-img-tn">
-
+                
                 <p>
-                  Now when Bob creates a new todo list on his laptop the changes will be pushed to his cellphone and when he opens it - even without any connection - the changes will be there.
+                  The push event triggers a notification that informs the user that work is being done in the background, and also makes a data sync to the local database from the server.
+                </p>
+
+                <h4>CushionDB Summary</h4>
+                <p>
+                  To recap - here is a table of the way Cushion handles different connectivity scenarios vs the way other solutions do:
+
+                  <img src="img/syncing-table.png" alt="Syncing table comp" class="img-fluid tm-img-tn">
+
+                  While many frameworks and tools do offer offline capabilities, none (to our awareness) employ PWA tools to achieve this native-like syncing abilities.
                 </p>
 
                 <h3>Working with CushionDB</h3>
@@ -503,7 +546,7 @@
 
                 <img src="img/cushionAPI.png" alt="CushionAPI" class="img-fluid tm-img-tn">
 
-                <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a <code>`cushiondb` </code>object in their front end code. This object gives the developer access to the <code>`store`</code> and <code>`account`</code> APIs.</p>
+                <p>The interaction with CushionDB takes place mostly on the client side. CushionDB exposes its APIs through a main CushionDB object. To access this object a developer simply instantiates a <code>`cushiondb`</code> object in their front end code. This object gives the developer access to the <code>`store`</code> and <code>`account`</code> APIs.</p>
 
                 <h5>`cushiondb.store`</h5>
 
@@ -574,7 +617,7 @@
                 </p>
 
                 <p>
-                  Our solution to this was to abstract of the service worker and name the events. When an event is triggered it has an id or a tag, and the service worker calls the function associated with that id.
+                  Our solution to this was to create CushionWorker - a wrapper around some of the service worker's functionality. Other than setting a callback to be called on an event the developer needs to provide an id for the event which CushionWorker stores in an array. When an event is triggered CushionWorker iterates over the callbacks in the relevant array, and calls the one with same id as the event id.
                 </p>
 
                 <img src="img/cushion-worker.png" alt="Cushion Worker" class="img-fluid tm-img-tn">
@@ -585,12 +628,14 @@
                   <h1 class="tm-blue-text tm-section-title tm-margin-b-45">Future Plans</h1>
                   <hr />
                 </header>
-                <p> Some of the things we are planing to add in the future are:
+                <p> CushionDB is still being developed, and there are many things we would like to add to it in the feature:
                 <ul>
+                  <li>Adding SSL for communication between client and server databases</li>
                   <li>Integrating <code>CacheAPI</code> in to the framework</li>
                   <li>Enabling developers to extend functionality through plugins</li>
+                  <li>Adding a robust test suite</li>
                   <li>Improve compatibility with other browsers</li>
-                  <li>Expand functionality to accommodate shared data centric apps</li>
+                  <li>Expand functionality to accommodate apps with group as well as private data</li>
                 </ul>
                 </p>
               </section>
