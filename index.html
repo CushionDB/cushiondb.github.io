@@ -361,13 +361,13 @@
                 <p>
                   In a traditional SQL database, even if we had 1000 users, we would still only have one database with one admin on the server. In order to make changes a user would authenticate with the application layer, and the latter would make changes to the database.
 
-                  In a one-database-per-user architecture however, as we will soon see, there is a strong preference  for having each user as the admin of their own database, and authenticating with is - bypassing the application layer.
+                  In a one-database-per-user architecture however, as we will soon see, there is a strong preference  for having each user as the admin of their own database, and authenticating with it - bypassing the application layer.
                 </p>
 
                 <img src="img/authentication.png" alt="Image" class="img-fluid tm-img-tn">
 
                 <p>
-                  Having our databases in both ends mirror each other closely with our users authenticating directly with the database will make syncing, authentication, database security and scaling a lot simpler.
+                  Having our databases on both ends mirror each other closely, with our users authenticating directly with their own database, will make syncing, authentication, database security and scaling a lot simpler.
                 </p>
 
                 <h3>Data Structure Summary</h3>
@@ -400,7 +400,7 @@
                 <h3>Hoodie</h3>
                 <p>Hoodie is an open source framework that simplifies the process of developing offline-first apps. It's built on top of PouchDB and CouchDB and is a no-backend framework - which basically means that a front-end developer can use Hoodie to create an offline-first web app without having to write any database, authentication or routing code.</p>
 
-                <p>Syncing with Hoodie is very similar to the Pouch & Couch model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
+                <p>Syncing with Hoodie is very similar to the PouchDB/CouchDB model, but does it out of the box without any developer intervention. It abstracts the CouchDB authenticating and signup process, removing the need for the developer to create HTTP request heavy setups, which are a byproduct of CouchDB’s design.</p>
 
                 <p>Pros and cons of Hoodie:</p>
 
@@ -431,7 +431,7 @@
                 </p>
 
                 <p>
-                  Jenny is out for the day, and during her launch break she opens the todo app and creates a todo list for tomorrow based on the morning's work. Our web app is offline-first so despite having no reception on the she can open the app and add a to-do list without any issues. She closes the app and doesn't think about it.
+                  Jenny is out for the day, and during her launch break she opens the todo app and creates a todo list for tomorrow based on the morning's work. Our web app is offline-first so despite having no reception on her phone, she can open the app and add a todo list without any issues. She closes the app and doesn't think about it.
                 </p>
 
                 <p>
@@ -450,17 +450,17 @@
 
                 <h5>CushionDB’s Solution</h5>
                 <p>
-                  CushionDB syncs the databases through the service worker's syncManager. Whenever a change is made to the local database CushionDB sends a message to the service worker which queues a callback that pushes the local changes to the remote database. 
+                  CushionDB syncs the databases through the service worker's SyncManager. Whenever a change is made to the local database, CushionDB sends a message to the service worker which queues a callback that pushes the local changes to the remote database. 
 
                   <img src="img/arch-service-worker-sync.png" alt="SW sync" class="img-fluid tm-img-tn">
 
-                  syncManager will either call the callback right away, or wait until a network is available. When network is detected syncManager attempts to call the callback function until it succeeds, or until it hits a attempt-limit. 
+                  SyncManager will either call the callback right away, or wait until a network is available. When a network connection is detected, SyncManager attempts to call the callback function until it succeeds, or until it hits aa attempt-limit. 
 
                   If a limit is reached, the browser will send a push notification to inform the user that some data was not synced and that intervention (reopening the app) is required.
                 </p>
 
                 <p>
-                  By syncing through the service worker CushionDB is able to update the remote database while the application is closed, as long as the device has a network connection. 
+                  By syncing through the service worker, CushionDB is able to update the remote database while the application is closed, as long as the device has a network connection. 
 
                   In this way CushionDB is also able to wait for the network rather than pinging the server to check whether the connection is restored (a common network-check pattern) when the app is running, which reduces the drain on the battery.
                 </p>
@@ -469,7 +469,7 @@
                 <p>
                   Let's go back to Jenny. She is in her wifi equipped room, making updates to her todos for tomorrow. She closes the app and goes to sleep. The next day, on the road (reception-less), she opens the todo app on her cellphone - but her new todos are not there.
 
-                  Even though her cellphone <em>did</em> have reception overnight - the app was not open, and couldn't initiate a fetch for the changes on the server. Jenny will now have to wait until she has reception again <em>and</em> her app is open to get the new todos.
+                  Even though her cellphone <em>did</em> have reception overnight, the app was not open and couldn't initiate a fetch for the changes on the server. Jenny will now have to wait until she has reception again <em>and</em> her app is open to get the new todos.
 
                   <img src="img/no-cell-2.png" alt="no reption 2" class="img-fluid tm-img-tn">
                 </p>
@@ -491,12 +491,12 @@
                 <img src="img/sync-manager-flow-diagram.png" alt="Notifications" class="img-fluid tm-img-tn">
                 
                 <p>
-                  The push event triggers a notification that informs the user that work is being done in the background, and also makes a data sync to the local database from the server.
+                  The push event triggers a notification that informs the user that work is being done in the background, and also triggers data sync to the local database from the server.
                 </p>
 
                 <h4>CushionDB Summary</h4>
                 <p>
-                  To recap - here is a table of the way Cushion handles different connectivity scenarios vs the way other solutions do:
+                  To recap - here is a table of the way CushionDB handles different connectivity scenarios vs the way other solutions do:
 
                   <img src="img/syncing-table.png" alt="Syncing table comp" class="img-fluid tm-img-tn">
 
